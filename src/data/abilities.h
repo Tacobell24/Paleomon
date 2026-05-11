@@ -2432,4 +2432,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+	
+    [ABILITY_SPIKED_TAIL] =
+    {
+        .name = _("Spiked Tail"),
+        .description = COMPOUND_STRING("Boosts tail moves"),
+        .aiRating = 8,
+    },	
 };
