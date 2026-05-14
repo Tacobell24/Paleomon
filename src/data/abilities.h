@@ -2439,4 +2439,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Boosts tail moves"),
         .aiRating = 8,
     },	
+	
+    [ABILITY_PYROMANIAC] =
+    {
+        .name = _("Pyromaniac"),
+        .description = COMPOUND_STRING("Boosts fire at cost of HP"),
+        .aiRating = 8,
+    },
 };

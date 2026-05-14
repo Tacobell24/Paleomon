@@ -4384,6 +4384,17 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 effect++;
             }
             break;
+        case ABILITY_PYROMANIAC:
+            if (!gBattleStruct->unableToUseMove
+			 && moveType == TYPE_FIRE
+             && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES)
+             && gBattleStruct->moveDamage[gBattlerTarget] > 0)
+            {
+                SetPassiveDamageAmount(gBattlerAttacker, max(1,gBattleScripting.savedDmg/5));
+                BattleScriptCall(BattleScript_MoveEffectRecoil);
+                effect++; 
+            }
+            break;			
         default:
             break;
         }
@@ -6745,6 +6756,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct BattleContext *ctx)
         break;
     case ABILITY_SUPREME_OVERLORD:
         modifier = uq4_12_multiply(modifier, GetSupremeOverlordModifier(battlerAtk));
+        break;
+    case ABILITY_PYROMANIAC:
+        if (moveType == TYPE_FIRE)
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
         break;
     default:
         break;
