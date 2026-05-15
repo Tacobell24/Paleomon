@@ -520,6 +520,7 @@ extern const u8 BattleScript_BeforeSnoreMessage[];
 extern const u8 BattleScript_SkyDropTargetTooHeavy[];
 extern const u8 BattleScript_SkyDropFlyingType[];
 extern const u8 BattleScript_SkyDropNoTarget[];
+extern const u8 BattleScript_HexoskeletonActivates[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

@@ -6927,6 +6927,13 @@ BattleScript_AbilityStatusEffect::
 	setnonvolatilestatus TRIGGER_ON_ABILITY
 	return
 
+BattleScript_HexoskeletonActivates::
+	call BattleScript_AbilityPopUp
+	volatileanimation BS_ATTACKER, VOLATILE_CURSED
+	printstring STRINGID_HEXOSKELETONCURSE
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_BattleBondActivatesOnMoveEndAttacker::
 	pause 5
 	copybyte gBattlerAbility, gBattlerAttacker
