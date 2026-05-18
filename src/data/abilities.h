@@ -2453,4 +2453,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Boosts fire at cost of HP"),
         .aiRating = 8,
     },
+	
+    [ABILITY_LONE_WOLF] =
+    {
+        .name = _("Lone Wolf"),
+        .description = COMPOUND_STRING("Powers up if battling alone"),
+        .aiRating = 8,
+    },
 };

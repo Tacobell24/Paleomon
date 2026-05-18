@@ -6589,6 +6589,21 @@ static inline u32 CalcMoveBasePower(struct BattleContext *ctx)
     return basePower;
 }
 
+static bool32 IsAloneInParty (enum BattlerId battler)
+{
+	struct Pokemon *party = GetBattlerParty(battler);
+	u32 battlerPartyId = gBattlerPartyIndexes[battler];
+	
+	for (u32 i = 0; i < PARTY_SIZE; i++)
+	{	
+	    if (i == battlerPartyId)
+			continue;
+		if (IsValidForBattle(&party[i]))
+	        return FALSE;
+	}
+	    return TRUE;
+}
+
 static inline u32 CalcMoveBasePowerAfterModifiers(struct BattleContext *ctx)
 {
     u32 holdEffectParamAtk;
@@ -6772,6 +6787,16 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct BattleContext *ctx)
     case ABILITY_PYROMANIAC:
         if (moveType == TYPE_FIRE)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+        break;
+    case ABILITY_LONE_WOLF:
+        if (IsAloneInParty(battlerAtk))
+		{
+			if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+			|| !IsBattlerAlive(BATTLE_PARTNER(battlerAtk)))
+		    {
+			    modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+	        }
+		}
         break;
     default:
         break;
