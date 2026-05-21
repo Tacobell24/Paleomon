@@ -1051,7 +1051,14 @@ enum __attribute__((packed)) Item
     ITEM_TATSUGIRINITE = 872,
     ITEM_GLIMMORANITE = 873,
 
-    ITEMS_COUNT,
+// Bone-specific Items
+    ITEM_FANG_NECKLACE = 874,
+    ITEM_DARIN_BERRY = 875,
+    ITEM_BONE_GEM = 876,
+    ITEM_BONINIUM_Z = 877,
+    ITEM_BONY_PLATE = 878,
+	
+	ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,
 };
 
