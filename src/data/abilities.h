@@ -2467,4 +2467,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Develop rabies symptoms."),
         .aiRating = 8,
     },
+	
+    [ABILITY_SKELETATE] =
+    {
+        .name = _("Skeletate"),
+        .description = COMPOUND_STRING("Normal moves become Bone."),
+        .aiRating = 8,
+    },
 };
