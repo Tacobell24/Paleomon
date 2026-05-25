@@ -2301,6 +2301,13 @@ bool32 HadMoreThanHalfHpNowDoesnt(enum BattlerId battler)
         && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2;
 }
 
+bool32 HadMoreThanAThirdHpNowDoesnt(enum BattlerId battler)
+{
+    // Had more than a third of hp before, now has less
+    return gBattleStruct->battlerState[battler].wasAboveThirdHp
+        && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 3;
+}
+
 u32 NumFaintedBattlersByAttacker(enum BattlerId battlerAtk)
 {
     u32 numMonsFainted = 0;
@@ -3858,6 +3865,26 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 effect++;
             }
             break;
+		case ABILITY_HYDROPHOBIA:
+            if (IsBattlerTurnDamaged(battler, EXCLUDING_SUBSTITUTES)
+             && IsBattlerAlive(battler)
+             && HadMoreThanAThirdHpNowDoesnt(battler))
+            {
+                gEffectBattler = gBattlerAbility = battler;
+
+                if (CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN, gLastUsedAbility))
+				{
+                    SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                }
+				
+				if (gBattleMons[battler].volatiles.confusionTurns == 0)
+				{
+					gBattleMons[battler].volatiles.confusionTurns = RandomUniform(RNG_CONFUSION_TURNS, 2, B_CONFUSION_TURNS); // 2-5 turns
+				}
+                BattleScriptCall(BattleScript_HydrophobiaActivates);
+				effect++;
+            }
+            break;
         case ABILITY_ANGER_SHELL:
             if (IsBattlerTurnDamaged(battler, EXCLUDING_SUBSTITUTES)
              && IsBattlerAlive(battler)
@@ -3942,6 +3969,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
              && gBattleMons[gBattlerAttacker].volatiles.disabledMove == MOVE_NONE
              && IsBattlerAlive(gBattlerAttacker)
              && !IsAbilityOnSide(gBattlerAttacker, ABILITY_AROMA_VEIL)
+             && gBattleMons[gBattlerAttacker].ability != ABILITY_HYDROPHOBIA
              && gChosenMove != MOVE_STRUGGLE
              && RandomPercentage(RNG_CURSED_BODY, 30))
             {
@@ -4200,7 +4228,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
              && (GetConfig(B_ABILITY_TRIGGER_CHANCE) >= GEN_4 ? RandomPercentage(RNG_CUTE_CHARM, 30) : RandomChance(RNG_CUTE_CHARM, 1, 3))
              && !(gBattleMons[gBattlerAttacker].volatiles.infatuation)
              && AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget)
-             && !IsAbilityAndRecord(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), ABILITY_OBLIVIOUS)
+             && !IsAbilityAndRecord(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), ABILITY_OBLIVIOUS || ABILITY_HYDROPHOBIA)
              && !CanBattlerAvoidContactEffects(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker), move)
              && !IsAbilityOnSide(gBattlerAttacker, ABILITY_AROMA_VEIL))
             {
@@ -6849,6 +6877,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct BattleContext *ctx)
         if (moveType == TYPE_FIRE)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
         break;
+    case ABILITY_HYDROPHOBIA:
+        if (moveType == TYPE_WATER)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
+        break;
     default:
         break;
     }
@@ -8409,7 +8441,20 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct BattleCont
 
     if (ctx->updateFlags && (illusionSpecies = GetIllusionMonSpecies(ctx->battlerDef)))
         TryNoticeIllusionInTypeEffectiveness(ctx->move, ctx->moveType, ctx->battlerAtk, ctx->battlerDef, modifier, illusionSpecies);
-
+    
+	else if (ctx->moveType == TYPE_PSYCHIC
+        && ctx->abilityDef == ABILITY_HYDROPHOBIA)
+	{
+		modifier = UQ_4_12(0.0);
+        if (ctx->updateFlags && ctx->abilityDef == ABILITY_HYDROPHOBIA)
+        {
+            gBattleStruct->moveResultFlags[ctx->battlerDef] |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
+            gLastUsedAbility = ABILITY_HYDROPHOBIA;
+            ctx->abilityBlocked = TRUE;
+            RecordAbilityBattle(ctx->battlerDef, ABILITY_HYDROPHOBIA);
+        }
+	}
+	
     bool32 isPresentHealing = GetMoveEffect(ctx->move) == EFFECT_PRESENT && gBattleStruct->presentBasePower == 0;
     bool32 ignoreTypeCalc = isPresentHealing || GetMoveCategory(ctx->move) == DAMAGE_CATEGORY_STATUS;
     if (ignoreTypeCalc && ctx->move != MOVE_THUNDER_WAVE)
@@ -9130,6 +9175,7 @@ enum ImmunityHealStatusOutcome TryImmunityAbilityHealStatus(enum BattlerId battl
         }
         break;
     case ABILITY_OBLIVIOUS:
+	case ABILITY_HYDROPHOBIA:
         if (gBattleMons[battler].volatiles.infatuation)
             outcome = IMMUNITY_INFATUATION_CLEARED;
         else if (GetConfig(B_OBLIVIOUS_TAUNT) >= GEN_6 && gBattleMons[battler].volatiles.tauntTimer != 0)

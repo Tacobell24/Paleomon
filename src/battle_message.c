@@ -878,6 +878,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_ZENMODETRIGGERED]                     = COMPOUND_STRING("{B_SCR_ABILITY} triggered!"),
     [STRINGID_ZENMODEENDED]                         = COMPOUND_STRING("{B_SCR_ABILITY} ended!"),
     [STRINGID_HEXOSKELETONCURSE]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} laid a curse upon {B_ATK_NAME_WITH_PREFIX}!"),
+    [STRINGID_HYDROPHOBIACONFUSION]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}'s mental state deteriorated!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =

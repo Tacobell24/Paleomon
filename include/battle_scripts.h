@@ -521,6 +521,8 @@ extern const u8 BattleScript_SkyDropTargetTooHeavy[];
 extern const u8 BattleScript_SkyDropFlyingType[];
 extern const u8 BattleScript_SkyDropNoTarget[];
 extern const u8 BattleScript_HexoskeletonActivates[];
+extern const u8 BattleScript_HydrophobiaActivates[];
+extern const u8 BattleScript_HydrophobiaActivatesTryBerry[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

@@ -4918,6 +4918,20 @@ BattleScript_BerserkActivates::
 BattleScript_BerserkActivatesTryBerry:
 	restoreattacker
 	return
+	
+BattleScript_HydrophobiaActivates::
+	saveattacker
+	copybyte gBattlerAttacker, gEffectBattler
+	call BattleScript_AbilityPopUp
+	volatileanimation BS_EFFECT_BATTLER, VOLATILE_CONFUSION
+	printstring STRINGID_HYDROPHOBIACONFUSION
+	statbuffchange BS_EFFECT_BATTLER, STAT_CHANGE_CERTAIN, BattleScript_HydrophobiaActivatesTryBerry
+	call BattleScript_StatUp
+	waitmessage B_WAIT_TIME_LONG
+	
+BattleScript_HydrophobiaActivatesTryBerry:
+	restoreattacker
+	return
 
 BattleScript_AngerShellActivates::
 	call BattleScript_AbilityPopUp

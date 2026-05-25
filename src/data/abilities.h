@@ -2443,21 +2443,28 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_PYROMANIAC] =
     {
         .name = _("Pyromaniac"),
-        .description = COMPOUND_STRING("Boosts fire at cost of HP"),
+        .description = COMPOUND_STRING("Boosts fire at cost of HP."),
         .aiRating = 8,
     },
 	
     [ABILITY_HEXOSKELETON] =
     {
         .name = _("Hexoskeleton"),
-        .description = COMPOUND_STRING("Boosts fire at cost of HP"),
+        .description = COMPOUND_STRING("Curses the foe on contact."),
         .aiRating = 8,
     },
 	
     [ABILITY_LONE_WOLF] =
     {
         .name = _("Lone Wolf"),
-        .description = COMPOUND_STRING("Powers up if battling alone"),
+        .description = COMPOUND_STRING("Powers up if battling alone."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_HYDROPHOBIA] =
+    {
+        .name = _("Hydrophobia"),
+        .description = COMPOUND_STRING("Develop rabies symptoms."),
         .aiRating = 8,
     },
 };

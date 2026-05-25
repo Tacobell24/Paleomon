@@ -1868,6 +1868,8 @@ static void Cmd_datahpupdate(void)
     }
     if (gBattleMons[battler].hp > gBattleMons[battler].maxHP / 2)
         gBattleStruct->battlerState[battler].wasAboveHalfHp = TRUE;
+    else if (gBattleMons[battler].hp > gBattleMons[battler].maxHP / 3)
+             gBattleStruct->battlerState[battler].wasAboveThirdHp = TRUE;
 
 }
 
@@ -8495,6 +8497,13 @@ static void Cmd_tryinfatuating(void)
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_HYDROPHOBIA)
+    {
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gLastUsedAbility = ABILITY_HYDROPHOBIA;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_HYDROPHOBIA);
+    }
+
     else
     {
         if (gBattleMons[gBattlerTarget].volatiles.infatuation
@@ -8766,8 +8775,14 @@ static void Cmd_disablelastusedattack(void)
         if (gBattleMons[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
             break;
     }
-    if (gBattleMons[gBattlerTarget].volatiles.disabledMove == MOVE_NONE
-        && i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] != 0)
+    if (GetBattlerAbility(gBattlerTarget) == ABILITY_HYDROPHOBIA)
+    {
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gLastUsedAbility = ABILITY_HYDROPHOBIA;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_HYDROPHOBIA);
+    }
+	else if (gBattleMons[gBattlerTarget].volatiles.disabledMove == MOVE_NONE
+             && i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] != 0)
     {
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].moves[i])
 
@@ -8809,7 +8824,13 @@ static void Cmd_trysetencore(void)
         }
     }
 
-    if ((IsMoveEncoreBanned(gLastMoves[gBattlerTarget]))
+	if (GetBattlerAbility(gBattlerTarget) == ABILITY_HYDROPHOBIA)
+	{
+		gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gLastUsedAbility = ABILITY_HYDROPHOBIA;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_HYDROPHOBIA);
+    }
+    else if ((IsMoveEncoreBanned(gLastMoves[gBattlerTarget]))
      || i == MAX_MON_MOVES
      || gLastMoves[gBattlerTarget] == MOVE_NONE
      || gLastMoves[gBattlerTarget] == MOVE_UNAVAILABLE
@@ -9681,8 +9702,14 @@ static void Cmd_settorment(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (gBattleMons[gBattlerTarget].volatiles.torment == TRUE
-        || (GetActiveGimmick(gBattlerTarget) == GIMMICK_DYNAMAX))
+	if (GetBattlerAbility(gBattlerTarget) == ABILITY_HYDROPHOBIA)
+	{
+		gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gLastUsedAbility = ABILITY_HYDROPHOBIA;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_HYDROPHOBIA);
+    }
+    else if (gBattleMons[gBattlerTarget].volatiles.torment == TRUE
+         || (GetActiveGimmick(gBattlerTarget) == GIMMICK_DYNAMAX))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -9703,6 +9730,12 @@ static void Cmd_settaunt(void)
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_HYDROPHOBIA)
+    {
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gLastUsedAbility = ABILITY_HYDROPHOBIA;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_HYDROPHOBIA);
+    }	
     else if (gBattleMons[gBattlerTarget].volatiles.tauntTimer == 0)
     {
         u8 turns;
@@ -11531,6 +11564,12 @@ static void Cmd_jumpifcaptivateaffected(void)
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_HYDROPHOBIA)
+    {
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gLastUsedAbility = ABILITY_HYDROPHOBIA;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_HYDROPHOBIA);
+    }	
     else if (AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget))
     {
         gBattlescriptCurrInstr = cmd->jumpInstr;
@@ -13149,7 +13188,7 @@ void BS_TrySetInfatuation(void)
     NATIVE_ARGS(const u8 *failInstr);
 
     if (!gBattleMons[gBattlerTarget].volatiles.infatuation
-        && gBattleMons[gBattlerTarget].ability != ABILITY_OBLIVIOUS
+        && gBattleMons[gBattlerTarget].ability != (ABILITY_OBLIVIOUS || ABILITY_HYDROPHOBIA)
         && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL)
         && AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget))
     {
