@@ -2533,8 +2533,9 @@ void AnimTask_GetTrappedMoveAnimId(u8 taskId)
     case MOVE_MAGMA_STORM:
         gBattleAnimArgs[0] = TRAP_ANIM_MAGMA_STORM;
         break;
-    case MOVE_INFESTATION:
-        gBattleAnimArgs[0] = TRAP_ANIM_INFESTATION;
+    case MOVE_WRAP:
+    case MOVE_BIND:
+        gBattleAnimArgs[0] = TRAP_ANIM_BIND;
         break;
     case MOVE_SNAP_TRAP:
         gBattleAnimArgs[0] = TRAP_ANIM_SNAP_TRAP;
@@ -2543,7 +2544,7 @@ void AnimTask_GetTrappedMoveAnimId(u8 taskId)
         gBattleAnimArgs[0] = TRAP_ANIM_THUNDER_CAGE;
         break;
     default:
-        gBattleAnimArgs[0] = TRAP_ANIM_BIND;
+        gBattleAnimArgs[0] = TRAP_ANIM_INFESTATION;	
         break;
     }
 

@@ -2474,4 +2474,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Normal moves become Bone."),
         .aiRating = 8,
     },
+		
+    [ABILITY_PLAGUEBORNE] =
+    {
+        .name = _("Plagueborne"),
+        .description = COMPOUND_STRING("Bugs infest on contact."),
+        .aiRating = 4,
+    },
 };

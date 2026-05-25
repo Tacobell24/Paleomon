@@ -4386,6 +4386,26 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 effect++;
             }
             break;
+        case ABILITY_PLAGUEBORNE:
+            if (IsBattlerAlive(gBattlerTarget)
+             && !gBattleStruct->unableToUseMove
+             && !(gBattleMons[gBattlerTarget].volatiles.wrapped)
+             && !IsMoveEffectBlockedByTarget(GetBattlerAbility(gBattlerTarget))
+             && IsMoveMakingContact(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker), move)
+             && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES) // Need to actually hit the target
+             && moveType == TYPE_BUG)
+            {
+                gEffectBattler = gBattlerTarget;
+                gBattleScripting.battler = gBattlerAttacker;
+                SetWrapTurns(gEffectBattler, GetBattlerHoldEffect(gBattlerAttacker));
+                gBattleMons[gEffectBattler].volatiles.wrapped = TRUE;
+                gBattleMons[gEffectBattler].volatiles.wrappedMove = MOVE_PLAGUEBORNE_PROXY;
+                gBattleMons[gEffectBattler].volatiles.wrappedBy = gBattlerAttacker;
+				BattleScriptCall(BattleScript_MoveEffectWrap);
+                BattleScriptCall(BattleScript_AbilityPopUp);
+                effect++;
+            }
+            break;			
         case ABILITY_TOXIC_CHAIN:
             if (gBattleStruct->toxicChainPriority)
             {
@@ -6826,6 +6846,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct BattleContext *ctx)
 	        }
 		}
         break;
+    case ABILITY_SKELETATE:
+        if (moveType == TYPE_BONE && gBattleStruct->battlerState[battlerAtk].ateBoost)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(GetConfig(B_ATE_MULTIPLIER) >= GEN_7 ? 1.2 : 1.3));
+        break;		
     default:
         break;
     }

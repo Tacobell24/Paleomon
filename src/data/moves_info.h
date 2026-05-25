@@ -21410,6 +21410,32 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_MalignantChain,
     },
 
+    [MOVE_PLAGUEBORNE_PROXY] =
+    {
+        .name = COMPOUND_STRING("plague"),
+        .description = COMPOUND_STRING(
+            "The foe is infested and\n"
+            "attacked for "BINDING_TURNS" turns."),
+        .effect = EFFECT_HIT,
+        .power = 20,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_WRAP,
+            .multistring.wrapped = B_MSG_WRAPPED_PLAGUEBORNE,
+        }),
+        .contestEffect = CONTEST_EFFECT_DONT_EXCITE_AUDIENCE,
+        .contestCategory = CONTEST_CATEGORY_CUTE,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_Infestation,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
