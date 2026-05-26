@@ -2241,6 +2241,21 @@ static enum MoveEndResult MoveEndAbsorb(void)
         break;
     }
 
+    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_EXSANGUINATE
+     && gBattleStruct->moveDamage[gBattlerTarget] > 0
+     && IsBattlerTurnDamaged(gBattlerTarget, INCLUDING_SUBSTITUTES)
+     && IsBattlerAlive(gBattlerAttacker)
+	 && IsBitingMove(gCurrentMove))
+    {
+        s32 healAmount = (gBattleStruct->moveDamage[gBattlerTarget] / 2);
+        SetHealScript(healAmount);
+        result = MOVEEND_RESULT_RUN_SCRIPT;
+        if (!IsBattlerAtMaxHp(gBattlerAttacker))
+		{
+            BattleScriptCall(BattleScript_AbilityPopUp);
+		}
+    }
+		
     gBattleScripting.moveendState++;
     return result;
 }

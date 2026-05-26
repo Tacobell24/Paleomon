@@ -2481,4 +2481,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Bugs infest on contact."),
         .aiRating = 4,
     },
+		
+    [ABILITY_EXSANGUINATE] =
+    {
+        .name = _("Exsanguinate"),
+        .description = COMPOUND_STRING("Biting movec drain HP."),
+        .aiRating = 4,
+    },
 };
