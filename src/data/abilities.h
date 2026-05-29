@@ -2485,7 +2485,14 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_EXSANGUINATE] =
     {
         .name = _("Exsanguinate"),
-        .description = COMPOUND_STRING("Biting movec drain HP."),
+        .description = COMPOUND_STRING("Biting moves drain HP."),
+        .aiRating = 4,
+    },
+		
+    [ABILITY_FIGHT_OR_FLIGHT] =
+    {
+        .name = _("Fight or Flight"),
+        .description = COMPOUND_STRING("Weaker moves go first."),
         .aiRating = 4,
     },
 };
