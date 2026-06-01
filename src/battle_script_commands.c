@@ -1094,6 +1094,9 @@ static bool32 ShouldSkipAccuracyCalcPastFirstHit(enum BattlerId battlerAtk, enum
     if (gSpecialStatuses[battlerAtk].parentalBondState == PARENTAL_BOND_2ND_HIT)
         return TRUE;
 
+    if (gSpecialStatuses[battlerAtk].packHuntingState == PACK_HUNTING_PACK_HIT)
+        return TRUE;
+
     if (!gSpecialStatuses[battlerAtk].multiHitOn)
         return FALSE;
 
@@ -1553,7 +1556,7 @@ static void Cmd_attackanimation(void)
     }
     else
     {
-        if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT) // No animation on second hit
+        if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT || gSpecialStatuses[gBattlerAttacker].packHuntingState == PACK_HUNTING_PACK_HIT) // No animation on second hit
         {
             gBattlescriptCurrInstr = cmd->nextInstr;
             return;
@@ -2485,7 +2488,7 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
     bool32 mirrorArmorReflected = (abilities[gBattlerTarget] == ABILITY_MIRROR_ARMOR);
     union StatChangeFlags flags = {0};
 
-    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT
+    if ((gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT || gSpecialStatuses[gBattlerAttacker].packHuntingState == PACK_HUNTING_1ST_HIT)
         && IsBattlerAlive(gBattlerTarget)
         && IsFinalStrikeEffect(moveEffect))
     {
@@ -2506,7 +2509,9 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
         moveEffect = MOVE_EFFECT_NONE;
     else if (DoesSubstituteBlockMoveEffectOnTarget(gBattlerAttacker, gEffectBattler, moveEffect))
         moveEffect = MOVE_EFFECT_NONE;
-
+    else if (gSpecialStatuses[gBattlerAttacker].packHuntingState == PACK_HUNTING_PACK_HIT)
+		moveEffect = MOVE_EFFECT_NONE;
+ 
     gBattleScripting.moveEffect = moveEffect; // ChangeStatBuffs still needs the global moveEffect
 
     switch (moveEffect)
@@ -2618,7 +2623,9 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
         break;
     case MOVE_EFFECT_PAYDAY:
         // Don't scatter coins on the second hit of Parental Bond
-        if (IsOnPlayerSide(gBattlerAttacker) && gSpecialStatuses[gBattlerAttacker].parentalBondState!= PARENTAL_BOND_2ND_HIT)
+        if (IsOnPlayerSide(gBattlerAttacker) 
+	    && (gSpecialStatuses[gBattlerAttacker].parentalBondState!= PARENTAL_BOND_2ND_HIT
+	     || gSpecialStatuses[gBattlerAttacker].packHuntingState!= PACK_HUNTING_PACK_HIT))
         {
             u16 payday = gPaydayMoney;
             enum MoveTarget moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);

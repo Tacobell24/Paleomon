@@ -1878,6 +1878,25 @@ static bool32 IsMoveParentalBondAffected(struct BattleContext *ctx)
     return TRUE;
 }
 
+static bool32 IsMovePackHuntingAffected(struct BattleContext *ctx)
+{
+    enum BattleMoveEffects effect = GetMoveEffect(ctx->move);
+
+    if (ctx->abilityAtk != ABILITY_PACK_HUNTING
+     || gBattleStruct->numSpreadTargets > 1
+     || GetMoveCategory(ctx->move) != DAMAGE_CATEGORY_PHYSICAL
+     || gBattleMoveEffects[effect].twoTurnEffect
+     || effect == EFFECT_OHKO
+     || effect == EFFECT_BEAT_UP
+     || IsMultiHitMove(ctx->move)
+     || GetMoveStrikeCount(ctx->move) > 1
+     || GetActiveGimmick(ctx->battlerAtk) == GIMMICK_Z_MOVE
+     || (effect == EFFECT_PRESENT && gBattleStruct->presentBasePower == 0)
+     || ctx->move == MOVE_STRUGGLE)
+        return FALSE;
+    return TRUE;
+}
+
 static void SetPossibleNewSmartTarget(u32 move)
 {
     if (!IsBattlerUnaffectedByMove(gBattlerTarget)
@@ -1899,6 +1918,43 @@ static void SetRandomMultiHitCounter()
         gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 7, 7, 3, 3); // 35%: 2 hits, 35%: 3 hits, 15% 4 hits, 15% 5 hits.
     else
         gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 3, 3, 1, 1); // 37.5%: 2 hits, 37.5%: 3 hits, 12.5% 4 hits, 12.5% 5 hits.
+}
+
+static u32 CountPackMembers(enum BattlerId battler)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+    u32 battlerPartyId = gBattlerPartyIndexes[battler];
+    u32 PackCount = 0;
+
+    u16 attackerSpecies = GetMonData(&party[battlerPartyId], MON_DATA_SPECIES);
+
+    u8 attackerType1 = GetSpeciesType(attackerSpecies, 0);
+    u8 attackerType2 = GetSpeciesType(attackerSpecies, 1);
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        if (i == battlerPartyId)
+            continue;
+        if (!IsValidForBattle(&party[i]))
+            continue;
+        if (GetMonData(&party[i], MON_DATA_STATUS))
+            continue;
+
+        u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
+
+        u8 type1 = GetSpeciesType(species, 0);
+        u8 type2 = GetSpeciesType(species, 1);
+
+        if (type1 == attackerType1
+         || type1 == attackerType2
+         || type2 == attackerType1
+         || type2 == attackerType2)
+        {
+            PackCount++;
+        }
+    }
+
+    return PackCount;
 }
 
 static enum CancelerResult CancelerMultihitMoves(struct BattleContext *ctx)
@@ -1974,6 +2030,12 @@ static enum CancelerResult CancelerMultihitMoves(struct BattleContext *ctx)
         gMultiHitCounter = 2;
         PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
     }
+    else if (IsMovePackHuntingAffected(ctx))
+	{
+        gSpecialStatuses[gBattlerAttacker].packHuntingState = PACK_HUNTING_1ST_HIT;
+		gMultiHitCounter = CountPackMembers(gBattlerAttacker) + 1;
+        PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)		 
+	}
     else
     {
         gMultiHitCounter = 0;
@@ -2872,6 +2934,9 @@ static enum MoveEndResult MoveEndMultihitMove(void)
                 if (gSpecialStatuses[gBattlerAttacker].parentalBondState)
                     gSpecialStatuses[gBattlerAttacker].parentalBondState--;
 
+                if (gSpecialStatuses[gBattlerAttacker].packHuntingState == PACK_HUNTING_1ST_HIT)
+                    gSpecialStatuses[gBattlerAttacker].packHuntingState = PACK_HUNTING_PACK_HIT;
+                    
                 gBattleScripting.animTargetsHit = 0;
                 gBattleScripting.moveendState = 0;
                 gSpecialStatuses[gBattlerAttacker].multiHitOn = TRUE;
@@ -2890,6 +2955,7 @@ static enum MoveEndResult MoveEndMultihitMove(void)
 
     gMultiHitCounter = 0;
     gSpecialStatuses[gBattlerAttacker].parentalBondState = PARENTAL_BOND_OFF;
+    gSpecialStatuses[gBattlerAttacker].packHuntingState = PACK_HUNTING_OFF;
     gSpecialStatuses[gBattlerAttacker].multiHitOn = 0;
     gBattleScripting.moveendState++;
     return result;
