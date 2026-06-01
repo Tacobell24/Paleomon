@@ -736,6 +736,11 @@ enum MoveTarget
 #define PARENTAL_BOND_2ND_HIT 1
 #define PARENTAL_BOND_OFF     0
 
+// Constants for Pack Hunting
+#define PACK_HUNTING_1ST_HIT  2
+#define PACK_HUNTING_PACK_HIT 1
+#define PACK_HUNTING_OFF      0
+
 // Constants for Torment
 #define PERMANENT_TORMENT   0xF
 

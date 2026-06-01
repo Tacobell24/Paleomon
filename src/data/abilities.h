@@ -2495,4 +2495,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Weaker moves go first."),
         .aiRating = 4,
     },
+		
+    [ABILITY_PACK_HUNTING] =
+    {
+        .name = _("Pack Hunting"),
+        .description = COMPOUND_STRING("Enlist the pack to fight."),
+        .aiRating = 4,
+    },
 };
