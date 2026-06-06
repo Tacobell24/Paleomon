@@ -76,6 +76,8 @@
 extern u16 gSpecialVar_ItemId;
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_8) ? 160 : 220)
+#define HATRED_EVO_THRESHOLD 30
+#define FAINTED_HP 0
 
 struct SpeciesItem
 {
@@ -4633,6 +4635,8 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
     u32 removeBagItemCount = 0;
     u32 evolutionTracker = GetMonData(mon, MON_DATA_EVOLUTION_TRACKER, 0);
     u32 partnerSpecies, partnerHeldItem;
+    u32 hp = GetMonData(mon, MON_DATA_HP, 0);
+    u32 speed = GetMonData(mon, MON_DATA_SPEED, 0);
     enum HoldEffect partnerHoldEffect;
 
     if (tradePartner != NULL)
@@ -4920,6 +4924,19 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
             if (GetCurrentRegion() != params[i].arg1)
                 currentCondition = TRUE;
             break;
+        // Custom conditions
+        case IF_LOW_FRIENDSHIP:
+            if (friendship <= params[i].arg1)
+                currentCondition = TRUE;
+            break;			
+        case IF_FAINTED:
+            if (hp == params[i].arg1)
+                currentCondition = TRUE;
+            break;		
+        case IF_HIGH_SPEED:
+            if (speed == params[i].arg1)
+                currentCondition = TRUE;
+            break;	
         case CONDITIONS_END:
             break;
         }
@@ -5535,7 +5552,7 @@ s32 CalculateFriendshipBonuses(struct Pokemon *mon, s32 modifier, enum HoldEffec
 
     if ((modifier > 0) && (itemHoldEffect == HOLD_EFFECT_FRIENDSHIP_UP))
         bonus += 150 * modifier / 100;
-    else
+	else
         bonus += modifier;
 
     if (modifier == 0)

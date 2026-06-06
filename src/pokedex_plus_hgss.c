@@ -6789,6 +6789,15 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 dept
                     StringAppend(gStringVar4, gStringVar2);
                     StringAppend(gStringVar4, COMPOUND_STRING(" in bag"));
                     break;
+                case IF_LOW_FRIENDSHIP:
+                    StringAppend(gStringVar4, COMPOUND_STRING("{DOWN_ARROW_2}friendship"));
+                    break;
+                case IF_FAINTED:
+                    StringAppend(gStringVar4, COMPOUND_STRING(" fainted"));
+                    break;
+                case IF_HIGH_SPEED:
+                    StringAppend(gStringVar4, COMPOUND_STRING(" high speed"));
+                    break;
                 case CONDITIONS_END:
                     break;
                 }
@@ -6942,6 +6951,7 @@ static void Task_LoadFormsScreen(u8 taskId)
         break;
     case 5:
     {
+
         u32 preservedPalettes = 0;
 
         if (gTasks[taskId].data[2] != 0)
