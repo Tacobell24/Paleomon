@@ -9283,6 +9283,24 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_FangNecklace,
     },
 
+    [ITEM_SHOCK_COLLAR] =
+    {
+        .name = ITEM_NAME("Shock Collar"),
+        .price = 4000,
+        .holdEffect = HOLD_EFFECT_FRIENDSHIP_DOWN,
+        .description = COMPOUND_STRING(
+            "A device that\n"
+            "shocks the wearer\n"
+            "into submission"),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_HELD_ITEM,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 10,
+        .iconPic = gItemIcon_ShockCollar,
+        .iconPalette = gItemIconPalette_ShockCollar,
+    },
+
 // Choice Items
 
     [ITEM_CHOICE_BAND] =

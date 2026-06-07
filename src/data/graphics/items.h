@@ -1301,6 +1301,9 @@ const u16 gItemIconPalette_MetalCoat[] = INCGFX_U16("graphics/items/icon_palette
 const u32 gItemIcon_FangNecklace[] = INCGFX_U32("graphics/items/icons/fang_necklace.png", ".4bpp.smol");
 const u16 gItemIconPalette_FangNecklace[] = INCGFX_U16("graphics/items/icon_palettes/fang_necklace.pal", ".gbapal");
 
+const u32 gItemIcon_ShockCollar[] = INCGFX_U32("graphics/items/icons/shock_collar.png", ".4bpp.smol");
+const u16 gItemIconPalette_ShockCollar[] = INCGFX_U16("graphics/items/icon_palettes/shock_collar.pal", ".gbapal");
+
 // Choice Items
 
 const u32 gItemIcon_ChoiceBand[] = INCGFX_U32("graphics/items/icons/choice_band.png", ".4bpp.smol");

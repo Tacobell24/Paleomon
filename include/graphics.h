@@ -1231,6 +1231,8 @@ extern const u32 gItemIcon_MetalCoat[];
 extern const u16 gItemIconPalette_MetalCoat[];
 extern const u32 gItemIcon_FangNecklace[];
 extern const u16 gItemIconPalette_FangNecklace[];
+extern const u32 gItemIcon_ShockCollar[];
+extern const u16 gItemIconPalette_ShockCollar[];
 // Choice Items
 extern const u32 gItemIcon_ChoiceBand[];
 extern const u16 gItemIconPalette_ChoiceBand[];
