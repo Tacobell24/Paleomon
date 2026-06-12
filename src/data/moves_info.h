@@ -21409,7 +21409,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         }),
         .battleAnimScript = gBattleAnimMove_MalignantChain,
     },
-
+    
+	// Custom Moves
     [MOVE_PLAGUEBORNE_PROXY] =
     {
         .name = COMPOUND_STRING("plague"),
@@ -21435,6 +21436,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestComboMoves = {0},
         .battleAnimScript = gBattleAnimMove_Infestation,
     },
+	
+    [MOVE_TOOTH_AND_CLAW] =
+    {
+        .name = COMPOUND_STRING("Tooth and Claw"),
+        .description = COMPOUND_STRING(
+            "Uses teeth and claws to\n"
+            "strike the foe twice."),
+        .effect = EFFECT_HIT,
+        .power = 30,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 30,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .bitingMove = TRUE,
+        .strikeCount = 2,
+        .contestEffect = C_UPDATED_MOVE_EFFECTS >= GEN_6 ? CONTEST_EFFECT_STARTLE_MONS_SAME_TYPE_APPEAL : CONTEST_EFFECT_BETTER_IF_SAME_TYPE,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_ToothAndClaw,
+        .validApprenticeMove = TRUE,
+    },	
 
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =

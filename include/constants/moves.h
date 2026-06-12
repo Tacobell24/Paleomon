@@ -904,8 +904,9 @@ enum __attribute__((packed)) Move
     MOVE_UPPER_HAND = 846,
     MOVE_MALIGNANT_CHAIN = 847,
     
-	// Paleomon Moves
+	// Custom Moves
 	MOVE_PLAGUEBORNE_PROXY = 848,
+	MOVE_TOOTH_AND_CLAW = 849,
     MOVES_COUNT_GEN9,
 
     // Add any custom moves here, not further down!
