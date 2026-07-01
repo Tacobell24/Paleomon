@@ -8430,6 +8430,26 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_DeepSeaTooth,
         .iconPalette = gItemIconPalette_DeepSeaTooth,
     },
+	
+    [ITEM_DEEP_SEA_PEARL] =
+    {
+        .name = ITEM_NAME("Deep Sea Pearl"),
+        .pluralName = ITEM_PLURAL_NAME("Deep Sea Pearls"),
+        .price = 4000,
+        .holdEffect = HOLD_EFFECT_DEEP_SEA_PEARL,
+        .description = COMPOUND_STRING(
+            "A hold item that\n"
+            "raises the Speed\n"
+            "of Clamperl."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_HELD_ITEM,
+        .type = EVO_HELD_ITEM_TYPE,
+        .fieldUseFunc = EVO_HELD_ITEM_FIELD_FUNC,
+        .effect = gItemEffect_EvoItem,
+        .flingPower = 30,
+        .iconPic = gItemIcon_DeepSeaPearl,
+        .iconPalette = gItemIconPalette_DeepSeaPearl,
+    },	
 
     [ITEM_SOUL_DEW] =
     {

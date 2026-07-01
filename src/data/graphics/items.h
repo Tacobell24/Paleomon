@@ -1169,6 +1169,9 @@ const u16 gItemIconPalette_DeepSeaScale[] = INCGFX_U16("graphics/items/icon_pale
 const u32 gItemIcon_DeepSeaTooth[] = INCGFX_U32("graphics/items/icons/deep_sea_tooth.png", ".4bpp.smol");
 const u16 gItemIconPalette_DeepSeaTooth[] = INCGFX_U16("graphics/items/icon_palettes/deep_sea_tooth.pal", ".gbapal");
 
+const u32 gItemIcon_DeepSeaPearl[] = INCGFX_U32("graphics/items/icons/deep_sea_pearl.png", ".4bpp.smol");
+const u16 gItemIconPalette_DeepSeaPearl[] = INCGFX_U16("graphics/items/icon_palettes/deep_sea_pearl.pal", ".gbapal");
+
 const u32 gItemIcon_SoulDew[] = INCGFX_U32("graphics/items/icons/soul_dew.png", ".4bpp.smol");
 const u16 gItemIconPalette_SoulDew[] = INCGFX_U16("graphics/items/icon_palettes/soul_dew.pal", ".gbapal");
 
