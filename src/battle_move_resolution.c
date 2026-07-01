@@ -2265,7 +2265,8 @@ static enum MoveEndResult MoveEndAbsorb(void)
     switch (moveEffect)
     {
     case EFFECT_STRENGTH_SAP:
-        if (gBattleStruct->passiveHpUpdate[gBattlerAttacker] > 0)
+        if (gBattleStruct->passiveHpUpdate[gBattlerAttacker] > 0
+         && !IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BONE))
         {
             s32 healAmount = gBattleStruct->passiveHpUpdate[gBattlerAttacker];
             SetHealScript(healAmount);
@@ -2274,9 +2275,10 @@ static enum MoveEndResult MoveEndAbsorb(void)
         break;
     case EFFECT_ABSORB:
     case EFFECT_DREAM_EATER:
-        if (gBattleStruct->moveDamage[gBattlerTarget] > 0
+		if (gBattleStruct->moveDamage[gBattlerTarget] > 0
          && IsBattlerTurnDamaged(gBattlerTarget, INCLUDING_SUBSTITUTES)
-         && IsBattlerAlive(gBattlerAttacker))
+         && IsBattlerAlive(gBattlerAttacker)
+		 && !IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BONE))
         {
             s32 healAmount = (gBattleStruct->moveDamage[gBattlerTarget] * GetMoveAbsorbPercentage(gCurrentMove) / 100);
             SetHealScript(healAmount);
@@ -2305,6 +2307,7 @@ static enum MoveEndResult MoveEndAbsorb(void)
 
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_EXSANGUINATE
      && gBattleStruct->moveDamage[gBattlerTarget] > 0
+	 && !IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BONE)
      && IsBattlerTurnDamaged(gBattlerTarget, INCLUDING_SUBSTITUTES)
      && IsBattlerAlive(gBattlerAttacker)
 	 && IsBitingMove(gCurrentMove))
