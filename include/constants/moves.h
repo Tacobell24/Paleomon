@@ -906,7 +906,7 @@ enum __attribute__((packed)) Move
     
 	// Custom Moves
 	MOVE_PLAGUEBORNE_PROXY = 848,
-	MOVE_TOOTH_AND_CLAW = 849,
+//	MOVE_TOOTH_AND_CLAW = 849,
     MOVES_COUNT_GEN9,
 
     // Add any custom moves here, not further down!

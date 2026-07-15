@@ -21436,7 +21436,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .contestComboMoves = {0},
         .battleAnimScript = gBattleAnimMove_Infestation,
     },
-	
+/*	
     [MOVE_TOOTH_AND_CLAW] =
     {
         .name = COMPOUND_STRING("Tooth and Claw"),
@@ -21461,7 +21461,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_ToothAndClaw,
         .validApprenticeMove = TRUE,
     },	
-
+*/
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
