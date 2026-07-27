@@ -6141,6 +6141,9 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
     u32 moveEffect = GetMoveEffect(move);
     u32 weight, hpFraction, speed;
 
+    if (gSpecialStatuses[ctx->battlerAtk].packHuntingState == PACK_HUNTING_PACK_HIT)
+        return 20;
+
     if (GetActiveGimmick(battlerAtk) == GIMMICK_Z_MOVE)
         return GetZMovePower(gCurrentMove);
 

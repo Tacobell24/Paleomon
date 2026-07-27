@@ -2484,4 +2484,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Boosts fire at cost of HP."),
         .aiRating = 8,
     },
+    [ABILITY_PACK_HUNTING] =
+    {
+        .name = _("Pack Hunting"),
+        .description = COMPOUND_STRING("Enlist the pack to fight."),
+        .aiRating = 4,
+    },
 };
