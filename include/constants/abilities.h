@@ -344,6 +344,7 @@ enum __attribute__((packed)) Ability
 	
 	//Custom Abilities
     ABILITY_SPIKED_TAIL = 319,
+    ABILITY_PYROMANIAC = 320,
     ABILITIES_COUNT_CUSTOM,
     ABILITIES_COUNT = ABILITIES_COUNT_CUSTOM,
 };
