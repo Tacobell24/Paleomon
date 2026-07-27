@@ -2472,4 +2472,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Spicy Spray"),
         .description = COMPOUND_STRING("Burns the foe when damaged."),
     },
+    [ABILITY_SPIKED_TAIL] =
+    {
+        .name = _("Spiked Tail"),
+        .description = COMPOUND_STRING("Boosts tail moves."),
+        .aiRating = 7,
+    },
 };
