@@ -1391,7 +1391,7 @@ static void Cmd_attackanimation(void)
     else
     {
 
-        if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT) // No animation on second hit
+        if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT || gSpecialStatuses[gBattlerAttacker].packHuntingState == PACK_HUNTING_PACK_HIT) // No animation on second hit
         {
             gBattlescriptCurrInstr = cmd->nextInstr;
             return;
@@ -2301,7 +2301,7 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
     bool32 certain = effectFlags & EFFECT_CERTAIN;
     bool32 affectsUser = (battlerAtk == effectBattler);
 
-    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT
+    if ((gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT || gSpecialStatuses[gBattlerAttacker].packHuntingState == PACK_HUNTING_1ST_HIT)
      && IsBattlerAlive(effectBattler)
      && IsFinalStrikeEffect(moveEffect))
     {
@@ -2322,6 +2322,8 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
         moveEffect = MOVE_EFFECT_NONE;
     else if (DoesSubstituteBlockMoveEffectOnTarget(battlerAtk, effectBattler, moveEffect))
         moveEffect = MOVE_EFFECT_NONE;
+	else if (gSpecialStatuses[gBattlerAttacker].packHuntingState == PACK_HUNTING_PACK_HIT)
+		moveEffect = MOVE_EFFECT_NONE;
 
     switch (moveEffect)
     {
