@@ -4279,6 +4279,18 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 effect++;
             }
             break;
+        case ABILITY_HEXOSKELETON:
+            if (IsBattlerAlive(gBattlerAttacker)
+             && !gBattleStruct->unableToUseMove
+             && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES)
+             && !(gBattleMons[gBattlerAttacker].volatiles.cursed)
+             && !CanBattlerAvoidContactEffects(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker), move))
+            {
+                gBattleMons[gBattlerAttacker].volatiles.cursed = TRUE;
+                BattleScriptCall(BattleScript_HexoskeletonActivates);
+                effect++;
+            }
+            break;
         default:
             break;
         }

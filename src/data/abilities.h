@@ -2490,4 +2490,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Enlist the pack to fight."),
         .aiRating = 4,
     },
+    [ABILITY_HEXOSKELETON] =
+    {
+        .name = _("Hexoskeleton"),
+        .description = COMPOUND_STRING("Curses the foe on contact."),
+        .aiRating = 4,
+    },
 };
