@@ -2502,4 +2502,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Powers up if battling alone."),
         .aiRating = 8,
     },
+    [ABILITY_EXSANGUINATE] =
+    {
+        .name = _("Exsanguinate"),
+        .description = COMPOUND_STRING("Biting movec drain HP."),
+        .aiRating = 4,
+    },
 };
