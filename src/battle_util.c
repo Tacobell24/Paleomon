@@ -6994,6 +6994,12 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
         if (ctx->fieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && IsBattleMoveSpecial(move))
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3333));
         break;
+    case ABILITY_FIGHT_OR_FLIGHT:
+        if (!IsBattleMoveStatus(move)
+		  && GetActiveGimmick(battlerAtk) != GIMMICK_Z_MOVE
+		  && GetMovePower(move) <= 40)
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.3333));
+        break;
     default:
         break;
     }

@@ -4772,6 +4772,13 @@ s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Mov
     {
         priority += 3;
     }
+    else if (ability == ABILITY_FIGHT_OR_FLIGHT
+          && !IsBattleMoveStatus(move)
+		  && GetActiveGimmick(battler) != GIMMICK_Z_MOVE
+		  && GetMovePower(move) <= 40)
+    {
+        priority ++;
+    }
 
     return priority;
 }
