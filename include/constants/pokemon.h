@@ -316,6 +316,10 @@ enum EvolutionConditions {
     IF_BAG_ITEM_COUNT,                  // The Player has the specific amount of an item in the bag. It then removes those items.
     IF_REGION,                          // The Player is in the specific region.
     IF_NOT_REGION,                      // The Player is NOT in the specific region.
+    // Custom conditions
+    IF_LOW_FRIENDSHIP,                  // The Pokémon has the defined amount of Friendship.
+    IF_FAINTED,                         // The Pokémon fainted during the battle.
+    IF_HIGH_SPEED,                      // The Pokémon's Speed is greater than or equal to a specificed number.
     CONDITIONS_END
 };
 
