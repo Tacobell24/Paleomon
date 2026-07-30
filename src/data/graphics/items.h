@@ -1513,6 +1513,9 @@ const u16 gItemIconPalette_RoomService[] = INCGFX_U16("graphics/items/icon_palet
 const u32 gItemIcon_UtilityUmbrella[] = INCGFX_U32("graphics/items/icons/utility_umbrella.png", ".4bpp.smol");
 const u16 gItemIconPalette_UtilityUmbrella[] = INCGFX_U16("graphics/items/icon_palettes/utility_umbrella.pal", ".gbapal");
 
+const u32 gItemIcon_ShockCollar[] = INCGFX_U32("graphics/items/icons/shock_collar.png", ".4bpp.smol");
+const u16 gItemIconPalette_ShockCollar[] = INCGFX_U16("graphics/items/icon_palettes/shock_collar.pal", ".gbapal");
+
 // Berries
 
 const u32 gItemIcon_CheriBerry[] = INCGFX_U32("graphics/items/icons/cheri_berry.png", ".4bpp.smol");

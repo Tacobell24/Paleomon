@@ -3462,10 +3462,14 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, enum Item item, u8 partyI
 
 #define UPDATE_FRIENDSHIP_FROM_ITEM()                                                                   \
 {                                                                                                       \
-    if ((!retVal || friendshipOnly) && !ShouldSkipFriendshipChange() && friendshipChange == 0)      \
+    if ((!retVal || friendshipOnly) && !ShouldSkipFriendshipChange() && friendshipChange == 0)          \
     {                                                                                                   \
         friendshipChange = itemEffect[itemEffectParam];                                                 \
-        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);                                        \
+		if (holdEffect == HOLD_EFFECT_FRIENDSHIP_DOWN && friendshipChange > 0)                          \
+		{                                                                                               \
+            friendshipChange = 0;                                                                       \
+		}                                                                                               \
+		friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);                                              \
         friendship += CalculateFriendshipBonuses(mon,friendshipChange,holdEffect);                      \
         if (friendship < 0)                                                                             \
             friendship = 0;                                                                             \
@@ -5037,6 +5041,8 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             friendship = 0;
         if (friendship > MAX_FRIENDSHIP)
             friendship = MAX_FRIENDSHIP;
+		if (holdEffect == HOLD_EFFECT_FRIENDSHIP_DOWN && mod > 0)
+			mod = 0;
 
         SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
     }
@@ -5047,6 +5053,8 @@ s32 CalculateFriendshipBonuses(struct Pokemon *mon, s32 modifier, enum HoldEffec
     s32 bonus = 0;
 
     if ((modifier > 0) && (itemHoldEffect == HOLD_EFFECT_FRIENDSHIP_UP))
+        bonus += 150 * modifier / 100;
+    else if     ((modifier < 0) && (itemHoldEffect == HOLD_EFFECT_FRIENDSHIP_DOWN))
         bonus += 150 * modifier / 100;
     else
         bonus += modifier;
