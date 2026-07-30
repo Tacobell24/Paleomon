@@ -4367,6 +4367,25 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 effect++; 
             }
             break;
+        case ABILITY_PLAGUEBORNE:
+            if (IsBattlerAlive(gBattlerTarget)
+             && !gBattleStruct->unableToUseMove
+             && !(gBattleMons[gBattlerTarget].volatiles.wrapped)
+             && !IsMoveEffectBlockedByTarget(GetBattlerAbility(gBattlerTarget))
+             && gBattlerAttacker != gBattlerTarget
+             && moveType == TYPE_BUG)
+            {
+                gEffectBattler = gBattlerTarget;
+                gBattleScripting.battler = gBattlerAttacker;
+                SetWrapTurns(gEffectBattler, GetBattlerHoldEffect(gBattlerAttacker));
+                gBattleMons[gEffectBattler].volatiles.wrapped = TRUE;
+                gBattleMons[gEffectBattler].volatiles.wrappedMove = MOVE_PLAGUEBORNE_PROXY;
+                gBattleMons[gEffectBattler].volatiles.wrappedBy = gBattlerAttacker;
+				BattleScriptCall(BattleScript_MoveEffectWrap);
+                BattleScriptCall(BattleScript_AbilityPopUp);
+                effect++;
+            }
+            break;
         default:
             break;
         }

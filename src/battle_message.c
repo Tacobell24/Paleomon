@@ -890,6 +890,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_AURORAVEILWOREOFF]                    = COMPOUND_STRING("{B_DEF_TEAM1} team's Aurora Veil wore off!"),
     [STRINGID_STICKYWEBDISAPPEAREDFROMYOU]          = COMPOUND_STRING("The sticky web has disappeared from the ground around you!"),
     [STRINGID_HEXOSKELETONCURSE]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} laid a curse upon {B_ATK_NAME_WITH_PREFIX}!"),
+    [STRINGID_PLAGUEBORNEINFESTED]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} was infested with plague!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -1139,6 +1140,7 @@ const u16 gStatDownStringIds[] =
 // Index copied from move's index in sTrappingMoves
 const u16 gWrappedStringIds[NUM_TRAPPING_MOVES] =
 {
+    [B_MSG_WRAPPED_PLAGUEBORNE] = STRINGID_PLAGUEBORNEINFESTED,    // MOVE_PLAGUEBORNE_PROXY
     [B_MSG_WRAPPED_BIND]        = STRINGID_PKMNSQUEEZEDBYBIND,     // MOVE_BIND
     [B_MSG_WRAPPED_WRAP]        = STRINGID_PKMNWRAPPEDBY,          // MOVE_WRAP
     [B_MSG_WRAPPED_FIRE_SPIN]   = STRINGID_PKMNTRAPPEDINVORTEX,    // MOVE_FIRE_SPIN

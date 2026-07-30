@@ -2514,4 +2514,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Weaker moves go first."),
         .aiRating = 4,
     },
+    [ABILITY_PLAGUEBORNE] =
+    {
+        .name = _("Plagueborne"),
+        .description = COMPOUND_STRING("Bugs infest on contact."),
+        .aiRating = 4,
+    },
 };
