@@ -491,6 +491,8 @@ void InitAndLaunchChosenStatusAnimation(enum BattlerId battler, bool32 isVolatil
             LaunchStatusAnimation(battler, B_ANIM_STATUS_CURSED);
         else if (status == VOLATILE_NIGHTMARE)
             LaunchStatusAnimation(battler, B_ANIM_STATUS_NIGHTMARE);
+        else if (status == VOLATILE_FRENZIED)
+            LaunchStatusAnimation(battler, B_ANIM_STATUS_FRENZIED);
         else // no animation
             gBattleSpritesDataPtr->healthBoxesData[battler].statusAnimActive = 0;
     }

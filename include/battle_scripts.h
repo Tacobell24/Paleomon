@@ -505,6 +505,10 @@ extern const u8 BattleScript_DecreaseStatChangeMessage[];
 extern const u8 BattleScript_DecreaseStatChangeMessageMinStat[];
 extern const u8 BattleScript_StatDidntChangeMessagePause[];
 extern const u8 BattleScript_HexoskeletonActivates[];
+extern const u8 BattleScript_RabidFrenzyActivates[];
+extern const u8 BattleScript_RabidFrenzyDeteriorates[];
+extern const u8 BattleScript_MoveUsedIsFrenzyPrevented[];
+extern const u8 BattleScript_SelectingNotAllowedMoveFrenzy[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

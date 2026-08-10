@@ -7647,6 +7647,14 @@ static void Cmd_tryinfatuating(void)
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_RABID_FRENZY)
+    {
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gBattleStruct->moveResultFlags[gBattlerTarget] |= MOVE_RESULT_DOESNT_AFFECT_FOE;
+        gBattlerAbility = gBattlerTarget;
+        gLastUsedAbility = ABILITY_RABID_FRENZY;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_RABID_FRENZY);
+    }
     else
     {
         if (gBattleMons[gBattlerTarget].volatiles.infatuation
@@ -8832,6 +8840,10 @@ static void Cmd_settaunt(void)
         gBattlerAbility = gBattlerTarget;
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
+    }
+	if (gBattleMons[gBattlerTarget].volatiles.frenzied)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
     else if (gBattleMons[gBattlerTarget].volatiles.tauntTimer == 0)
     {
@@ -12263,7 +12275,7 @@ void BS_TrySetInfatuation(void)
     NATIVE_ARGS(const u8 *failInstr);
 
     if (!gBattleMons[gBattlerTarget].volatiles.infatuation
-        && gBattleMons[gBattlerTarget].ability != ABILITY_OBLIVIOUS
+        && gBattleMons[gBattlerTarget].ability != (ABILITY_OBLIVIOUS || ABILITY_RABID_FRENZY)
         && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL)
         && AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget))
     {

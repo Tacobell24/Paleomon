@@ -28915,6 +28915,20 @@ gBattleAnimStatus_Frostbite::
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
+gBattleAnimStatus_Frenzied::
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 4, 0, 8, RGB(31, 5, 0)
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 2, 0, 15, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 4, 8, 0, RGB(31, 5, 0)
+	waitforvisualfinish
+	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, -20, -28
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	delay 12
+	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, 20, -28
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	end
+
 gBattleAnimGeneral_StatsChange::
 	createvisualtask AnimTask_StatsChange, 5
 	waitforvisualfinish

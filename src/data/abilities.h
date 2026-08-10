@@ -2520,4 +2520,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Bugs infest on contact."),
         .aiRating = 4,
     },
+    [ABILITY_RABID_FRENZY] =
+    {
+        .name = _("Rabid Frenzy"),
+        .description = COMPOUND_STRING("Become frenzied on hit."),
+        .aiRating = 8,
+    },
 };

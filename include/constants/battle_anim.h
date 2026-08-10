@@ -633,8 +633,9 @@ enum AnimBattler
 #define B_ANIM_STATUS_CURSED            7
 #define B_ANIM_STATUS_NIGHTMARE         8
 #define B_ANIM_STATUS_FRB               9
+#define B_ANIM_STATUS_FRENZIED          10
 
-#define NUM_B_ANIMS_STATUS              10
+#define NUM_B_ANIMS_STATUS              11
 
 // Tasks with return values often assign them to gBattleAnimArgs[7].
 #define ARG_RET_ID 7

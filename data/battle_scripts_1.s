@@ -6355,3 +6355,25 @@ BattleScript_SilphScopeUnveiled::
 	printstring STRINGID_GHOSTWASMAROWAK
 	waitmessage B_WAIT_TIME_LONG
 	end2
+
+BattleScript_RabidFrenzyActivates::
+	call BattleScript_AbilityPopUp
+	volatileanimation BS_TARGET, VOLATILE_FRENZIED
+	printstring STRINGID_RABIDFRENZYACTIVE
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_RabidFrenzyDeteriorates::
+	volatileanimation BS_TARGET, VOLATILE_CONFUSION
+	printstring STRINGID_RABIDFRENZYDETERIORATED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_MoveUsedIsFrenzyPrevented::
+	printstring STRINGID_PKMNCANTUSEMOVEFRENZY
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_SelectingNotAllowedMoveFrenzy::
+	printselectionstring STRINGID_PKMNCANTUSEMOVEFRENZY
+	endselectionscript

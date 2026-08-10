@@ -891,6 +891,9 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_STICKYWEBDISAPPEAREDFROMYOU]          = COMPOUND_STRING("The sticky web has disappeared from the ground around you!"),
     [STRINGID_HEXOSKELETONCURSE]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} laid a curse upon {B_ATK_NAME_WITH_PREFIX}!"),
     [STRINGID_PLAGUEBORNEINFESTED]                  = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} was infested with plague!"),
+    [STRINGID_RABIDFRENZYACTIVE]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} became frenzied!"),
+    [STRINGID_RABIDFRENZYDETERIORATED]              = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}'s mental state deteriorated!"),
+    [STRINGID_PKMNCANTUSEMOVEFRENZY]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} is too frenzied to use {B_CURRENT_MOVE}!\p"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =

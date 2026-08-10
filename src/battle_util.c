@@ -1545,6 +1545,27 @@ u32 TrySetCantSelectMoveBattleScript(enum BattlerId battler)
         }
     }
 
+    if (GetActiveGimmick(battler) != GIMMICK_Z_MOVE
+     && gBattleMons[battler].volatiles.frenzied
+     && IsBattleMoveStatus(move)
+     && (GetConfig(B_TAUNT_ME_FIRST) < GEN_5 || moveEffect != EFFECT_ME_FIRST))
+    {
+        if ((GetActiveGimmick(battler) == GIMMICK_DYNAMAX))
+            gCurrentMove = MOVE_MAX_GUARD;
+        else
+            gCurrentMove = move;
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        {
+            gPalaceSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveTauntInPalace;
+            gProtectStructs[battler].palaceUnableToUseMove = TRUE;
+        }
+        else
+        {
+            gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveFrenzy;
+            limitations++;
+        }
+    }
+
     return limitations;
 }
 
@@ -3615,6 +3636,16 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                     effect++;
                 }
                 break;
+            case ABILITY_RABID_FRENZY:
+                if (CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN, gLastUsedAbility) 
+			     && gBattleMons[battler].volatiles.frenzied)
+                {
+                    gEffectBattler = gBattlerAbility = battler;
+                    SetStatChange(battler, STAT_ATK, 1);
+                    BattleScriptCall(BattleScript_AbilityStatChange);
+                    effect++;
+                }
+                break;
             case ABILITY_MOODY:
                 {
                     enum Stat stat = STAT_ATK;
@@ -4140,7 +4171,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
              && (GetConfig(B_ABILITY_TRIGGER_CHANCE) >= GEN_4 ? RandomPercentage(RNG_CUTE_CHARM, 30) : RandomChance(RNG_CUTE_CHARM, 1, 3))
              && !(gBattleMons[gBattlerAttacker].volatiles.infatuation)
              && AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget)
-             && !IsAbilityAndRecord(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), ABILITY_OBLIVIOUS)
+             && !IsAbilityAndRecord(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), ABILITY_OBLIVIOUS || ABILITY_RABID_FRENZY)
              && !CanBattlerAvoidContactEffects(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker), move)
              && !IsAbilityOnSide(gBattlerAttacker, ABILITY_AROMA_VEIL))
             {
@@ -4290,6 +4321,26 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 BattleScriptCall(BattleScript_HexoskeletonActivates);
                 effect++;
             }
+            break;
+         case ABILITY_RABID_FRENZY:
+            if (IsBattlerTurnDamaged(battler, EXCLUDING_SUBSTITUTES)
+             && IsBattlerAlive(battler)
+             && !gBattleMons[battler].volatiles.frenzied)
+            {
+                gEffectBattler = gBattlerAbility = battler;
+                gBattleMons[battler].volatiles.frenzied = TRUE;
+				BattleScriptCall(BattleScript_RabidFrenzyActivates);
+                effect++;
+            }
+            else if (gBattleMons[battler].volatiles.confusionTurns == 0
+             && IsBattlerTurnDamaged(battler, EXCLUDING_SUBSTITUTES)
+             && IsBattlerAlive(battler)
+			 && gBattleMons[battler].volatiles.frenzied
+			 && !gBattleMons[battler].volatiles.infiniteConfusion)
+			 {
+			     gBattleMons[battler].volatiles.confusionTurns = RandomUniform(RNG_CONFUSION_TURNS, 2, B_CONFUSION_TURNS); // 2-5 turns
+                 BattleScriptCall(BattleScript_RabidFrenzyDeteriorates);
+			 }
             break;
         default:
             break;
@@ -8959,6 +9010,13 @@ enum ImmunityHealStatusOutcome TryImmunityAbilityHealStatus(enum BattlerId battl
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_TAUNT;
             outcome = IMMUNITY_TAUNT_CLEARED;
+        }
+        break;
+    case ABILITY_RABID_FRENZY:
+        if (gBattleMons[battler].volatiles.infatuation)
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_INFATUATION;
+            outcome = IMMUNITY_INFATUATION_CLEARED;
         }
         break;
     default:
