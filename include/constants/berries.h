@@ -68,6 +68,7 @@
     F(ROWAP) \
     F(ROSELI) \
     F(KEE) \
+    F(MANDI) \
     F(MARANGA)
 
 #endif

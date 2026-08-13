@@ -5114,6 +5114,26 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_PixiePlate,
     },
 
+    [ITEM_BONY_PLATE] =
+    {
+        .name = ITEM_NAME("Bony Plate"),
+        .price = 1000,
+        .holdEffect = HOLD_EFFECT_PLATE,
+        .holdEffectParam = 20,
+        .description = COMPOUND_STRING(
+            "A tablet that ups\n"
+            "the power of\n"
+            "Bone-type moves."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_PLATE,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_BONE,
+        .flingPower = 90,
+        .iconPic = gItemIcon_Plate,
+        .iconPalette = gItemIconPalette_BonyPlate,
+    },
+	
 // Drives
 
     [ITEM_DOUSE_DRIVE] =
@@ -7592,6 +7612,25 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_FairyGem,
     },
 
+	[ITEM_BONE_GEM] =
+    {
+        .name = ITEM_NAME("Bone Gem"),
+        .price = GEM_PRICE,
+        .holdEffect = HOLD_EFFECT_GEMS,
+        .holdEffectParam = GEM_BOOST_PARAM,
+        .description = COMPOUND_STRING(
+            "Increases the\n"
+            "power of Bone\n"
+            "Type moves."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_GEM,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_BONE,
+        .iconPic = gItemIcon_TypeGem,
+        .iconPalette = gItemIconPalette_BoneGem,
+    },
+	
 // Z-Crystals
 
     [ITEM_NORMALIUM_Z] =
@@ -8222,6 +8261,24 @@ const struct ItemInfo gItemsInfo[] =
         .secondaryId = 255, //signature z move
         .iconPic = gItemIcon_UltranecroziumZ,
         .iconPalette = gItemIconPalette_UltranecroziumZ,
+    },
+
+    [ITEM_BONINIUM_Z] =
+    {
+        .name = ITEM_NAME("Boninium Z"),
+        .price = 0,
+        .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
+        .description = COMPOUND_STRING(
+            "Upgrade Bone-\n"
+            "type moves into\n"
+            "Z-Moves."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_Z_CRYSTAL,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_BONE,
+        .iconPic = gItemIcon_BoniniumZ,
+        .iconPalette = gItemIconPalette_BoniniumZ,
     },
 
 // Species-specific Held Items
@@ -9205,6 +9262,27 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_MetalCoat,
     },
 
+	[ITEM_FANG_NECKLACE] =
+    {
+        .name = ITEM_NAME("Fang Necklace"),
+        .pluralName = ITEM_PLURAL_NAME("Fang Necklaces"),
+        .price = TYPE_BOOSTING_PRICE,
+        .holdEffect = HOLD_EFFECT_TYPE_POWER,
+        .holdEffectParam = TYPE_BOOST_PARAM,
+        .description = COMPOUND_STRING(
+            "A hold item that\n"
+            "raises the power of\n"
+            "Bone-type moves."),
+        .pocket = POCKET_ITEMS,
+        .sortType = ITEM_TYPE_TYPE_BOOST_HELD_ITEM,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = TYPE_BONE,
+        .flingPower = 30,
+        .iconPic = gItemIcon_FangNecklace,
+        .iconPalette = gItemIconPalette_FangNecklace,
+    },
+	
 // Choice Items
 
     [ITEM_CHOICE_BAND] =
@@ -12165,6 +12243,25 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_EnigmaBerry,
     },
 
+    [ITEM_MANDI_BERRY] =
+    {
+        .name = ITEM_NAME("Mandi Berry"),
+        .pluralName = ITEM_PLURAL_NAME("Mandi Berries"),
+        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .holdEffect = HOLD_EFFECT_RESIST_BERRY,
+        .holdEffectParam = TYPE_BONE,
+        .description = COMPOUND_STRING(
+            "A hold item that\n"
+            "weakens a Bone\n"
+            "move if weak to it."),
+        .pocket = POCKET_BERRIES,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 10,
+        .iconPic = gItemIcon_MandiBerry,
+        .iconPalette = gItemIconPalette_MandiBerry,
+    },
+	
 // TMs/HMs. They don't have a set flingPower, as that's handled by GetFlingPowerFromItemId.
 
     [ITEM_TM_FOCUS_PUNCH] =

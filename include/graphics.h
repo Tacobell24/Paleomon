@@ -800,6 +800,7 @@ extern const u16 gItemIconPalette_DracoPlate[];
 extern const u16 gItemIconPalette_DreadPlate[];
 extern const u16 gItemIconPalette_IronPlate[];
 extern const u16 gItemIconPalette_PixiePlate[];
+extern const u16 gItemIconPalette_BonyPlate[];
 // Drives
 extern const u32 gItemIcon_Drive[];
 extern const u16 gItemIconPalette_DouseDrive[];
@@ -1055,6 +1056,7 @@ extern const u16 gItemIconPalette_DragonGem[];
 extern const u16 gItemIconPalette_DarkGem[];
 extern const u16 gItemIconPalette_SteelGem[];
 extern const u16 gItemIconPalette_FairyGem[];
+extern const u16 gItemIconPalette_BoneGem[];
 // Z-Crystals
 extern const u32 gItemIcon_NormaliumZ[];
 extern const u16 gItemIconPalette_NormaliumZ[];
@@ -1126,6 +1128,8 @@ extern const u32 gItemIcon_PikashuniumZ[];
 extern const u16 gItemIconPalette_PikashuniumZ[];
 extern const u32 gItemIcon_UltranecroziumZ[];
 extern const u16 gItemIconPalette_UltranecroziumZ[];
+extern const u32 gItemIcon_BoniniumZ[];
+extern const u16 gItemIconPalette_BoniniumZ[];
 // Species-specific Held Items
 extern const u32 gItemIcon_LightBall[];
 extern const u16 gItemIconPalette_LightBall[];
@@ -1225,6 +1229,8 @@ extern const u16 gItemIconPalette_DragonFang[];
 extern const u32 gItemIcon_BlackGlasses[];
 extern const u32 gItemIcon_MetalCoat[];
 extern const u16 gItemIconPalette_MetalCoat[];
+extern const u32 gItemIcon_FangNecklace[];
+extern const u16 gItemIconPalette_FangNecklace[];
 // Choice Items
 extern const u32 gItemIcon_ChoiceBand[];
 extern const u16 gItemIconPalette_ChoiceBand[];
@@ -1507,6 +1513,8 @@ extern const u32 gItemIcon_KeeBerry[];
 extern const u16 gItemIconPalette_KeeBerry[];
 extern const u32 gItemIcon_MarangaBerry[];
 extern const u16 gItemIconPalette_MarangaBerry[];
+extern const u32 gItemIcon_MandiBerry[];
+extern const u16 gItemIconPalette_MandiBerry[];
 // TMs/HMs
 extern const u32 gItemIcon_TM[];
 extern const u32 gItemIcon_HM[];
@@ -1529,6 +1537,7 @@ extern const u16 gItemIconPalette_DarkTMHM[];
 extern const u16 gItemIconPalette_SteelTMHM[];
 extern const u16 gItemIconPalette_MysteryTMHM[];
 extern const u16 gItemIconPalette_FairyTMHM[];
+extern const u16 gItemIconPalette_BoneTMHM[];
 // Charms
 extern const u32 gItemIcon_OvalCharm[];
 extern const u16 gItemIconPalette_OvalCharm[];

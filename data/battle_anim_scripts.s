@@ -35618,3 +35618,23 @@ gBattleAnimGeneral_DynamaxGrowth:: @ PORTED FROM CFRU
 	createvisualtask AnimTask_DynamaxGrowth, 5, 1, 0
 	waitforvisualfinish
 	end
+
+@@@ CUSTOM MOVES
+gBattleAnimMove_SkeletalSmash::
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_BONEMERANG, SOUND_PAN_TARGET
+	call SkeletalSmashBones
+	end
+
+SkeletalSmashBones:
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, 0, 0, 15
+	delay 12
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -32, -15, 0, 0, 15
+	delay 12
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -22, -5, 0, 0, 15
+	delay 12
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 0, 0, 15
+	delay 12
+	return

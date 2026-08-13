@@ -885,6 +885,7 @@ extern const u8 gBattleAnimMove_SearingSunrazeSmash[];
 extern const u8 gBattleAnimMove_MenacingMoonrazeMaelstrom[];
 extern const u8 gBattleAnimMove_LightThatBurnsTheSky[];
 extern const u8 gBattleAnimMove_SoulStealing7StarStrike[];
+extern const u8 gBattleAnimMove_SkeletalSmash[];
 extern const u8 gBattleAnimMove_MaxGuard[];
 extern const u8 gBattleAnimMove_MaxFlare[];
 extern const u8 gBattleAnimMove_MaxFlutterby[];

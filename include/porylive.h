@@ -3,7 +3,7 @@
 
 #if PORYLIVE
 #include "global.h"
-#define PORYLIVE_SCRIPT_BUFFER_SIZE 102400 // 100kb buffer
+#define PORYLIVE_SCRIPT_BUFFER_SIZE 16384 // 16kb buffer
 #define PORYLIVE_MAX_OVERRIDES 200
 
 struct PoryLiveOverride
@@ -13,7 +13,7 @@ struct PoryLiveOverride
 };
 
 // porylive vars
-extern volatile const u8 gPoryLiveScriptBuffer[PORYLIVE_SCRIPT_BUFFER_SIZE]; // Contains actual script data
+extern volatile u8 gPoryLiveScriptBuffer[PORYLIVE_SCRIPT_BUFFER_SIZE]; // Contains actual script data
 extern volatile struct PoryLiveOverride gPoryLiveOverrides[PORYLIVE_MAX_OVERRIDES]; // Contains pointers to the overrides
 extern volatile bool32 gPoryLiveScriptInitialized; // Whether the Lua script has been initialized
 

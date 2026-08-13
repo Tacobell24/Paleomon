@@ -1054,6 +1054,11 @@ enum __attribute__((packed)) Item
    
    //Custom items
     ITEM_SHOCK_COLLAR = 874,
+    ITEM_BONE_GEM = 875,
+    ITEM_BONINIUM_Z = 876,
+    ITEM_BONY_PLATE = 877,
+    ITEM_FANG_NECKLACE = 878,
+    ITEM_MANDI_BERRY = 879,
 
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,

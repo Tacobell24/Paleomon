@@ -13,9 +13,7 @@
 #include "constants/script_commands.h"
 #include "field_message_box.h"
 
-
 #include "dexnav.h"
-
 #if PORYLIVE
 #include "porylive.h"
 #endif // PORYLIVE
@@ -129,7 +127,7 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
                 return FALSE;
             }
 
-            if (ctx->scriptPtr == gNullScriptPtr)
+            if (ctx->scriptPtr == NULL)
             {
                 while (1)
                     asm("svc 2"); // HALT
@@ -183,7 +181,6 @@ static const u8 *ScriptPop(struct ScriptContext *ctx)
 void ScriptJump(struct ScriptContext *ctx, const u8 *ptr)
 {
     assertf(ptr != NULL, "goto to NULL");
-
     #if PORYLIVE
     ctx->scriptPtr = PoryLive_GetScriptPointer(ptr);
     #else

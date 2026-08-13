@@ -2310,6 +2310,39 @@ const struct Berry gBerries[NUM_BERRIES + 1] =
         .berryTreePicTable = gPicTable_DurinBerryTree,
         .berryTreePaletteSlotTable = gBerryTreePaletteSlotTable_Durin,
     },
+
+    [BERRY_ID_MANDI] =
+    {
+        .info = {
+            .name = _("Mandi"),
+            .firmness = BERRY_FIRMNESS_SOFT,
+            .color = OW_BERRY_COLORS == GEN_6_XY ? BERRY_COLOR_PINK : BERRY_COLOR_RED,
+            .size = 35,
+            .maxYield = YIELD_RATE(5, 5, 20, 10),
+            .minYield = YIELD_RATE(2, 1, 3, 2),
+            .description1 = COMPOUND_STRING("A very sweet and juicy berry."),
+            .description2 = COMPOUND_STRING("Its seeds are mildly poisonous."),
+            .growthDuration = GROWTH_DURATION(84, 72, 108, 48, 32, 48),
+            .spicy = 0,
+            .dry = 0,
+            .sweet = 25,
+            .bitter = 10,
+            .sour = 0,
+            .smoothness = 35,
+            .drainRate = 6,
+            .waterBonus = 10,
+            .weedsBonus = 1,
+            .pestsBonus = 4,
+        },
+        .naturalGiftType = TYPE_BONE,
+        .naturalGiftPower = 80,
+        .berryCrushDifficulty =  60,
+        .berryCrushPowder =  50,
+        .berryPic = gBerryPic_Mandi,
+        .berryPal = gBerryPalette_Mandi,
+        .berryTreePicTable = gPicTable_MandiBerryTree,
+        .berryTreePaletteSlotTable = gBerryTreePaletteSlotTable_Mandi,
+    },
 };
 
 const struct BerryTree gBlankBerryTree = {};

@@ -1,7 +1,7 @@
 #include "porylive.h"
 
 #if PORYLIVE
-__attribute__((used)) volatile const u8 gPoryLiveScriptBuffer[PORYLIVE_SCRIPT_BUFFER_SIZE] = {0}; // Passed from Lua to memory
+EWRAM_DATA volatile u8 gPoryLiveScriptBuffer[PORYLIVE_SCRIPT_BUFFER_SIZE] = {0}; // Passed from Lua to memory
 EWRAM_DATA volatile struct PoryLiveOverride gPoryLiveOverrides[PORYLIVE_MAX_OVERRIDES] = {0}; // Contains pointers to the overrides
 EWRAM_DATA volatile bool32 gPoryLiveScriptInitialized = FALSE; // Whether the Lua script has been initialized
 
