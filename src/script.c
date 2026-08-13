@@ -13,7 +13,12 @@
 #include "constants/script_commands.h"
 #include "field_message_box.h"
 
+
 #include "dexnav.h"
+
+#if PORYLIVE
+#include "porylive.h"
+#endif // PORYLIVE
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -63,7 +68,11 @@ void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTable
 
 u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr)
 {
+    #if PORYLIVE
+    ctx->scriptPtr = PoryLive_GetScriptPointer(ptr);
+    #else
     ctx->scriptPtr = ptr;
+    #endif // PORYLIVE
     ctx->mode = SCRIPT_MODE_BYTECODE;
     return 1;
 }
@@ -83,6 +92,13 @@ void StopScript(struct ScriptContext *ctx)
 
 bool8 RunScriptCommand(struct ScriptContext *ctx)
 {
+    if (ctx->mode == SCRIPT_MODE_STOPPED)
+        return FALSE;
+
+    #if PORYLIVE
+    ctx->scriptPtr = PoryLive_GetScriptPointer(ctx->scriptPtr);
+    #endif // PORYLIVE
+
     switch (ctx->mode)
     {
     case SCRIPT_MODE_STOPPED:
@@ -96,6 +112,9 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
                 ctx->mode = SCRIPT_MODE_BYTECODE;
             return TRUE;
         }
+        #if PORYLIVE
+        ctx->scriptPtr = PoryLive_GetScriptPointer(ctx->scriptPtr);
+        #endif // PORYLIVE
         ctx->mode = SCRIPT_MODE_BYTECODE;
         // fallthrough
     case SCRIPT_MODE_BYTECODE:
@@ -109,6 +128,16 @@ bool8 RunScriptCommand(struct ScriptContext *ctx)
                 ctx->mode = SCRIPT_MODE_STOPPED;
                 return FALSE;
             }
+
+            if (ctx->scriptPtr == gNullScriptPtr)
+            {
+                while (1)
+                    asm("svc 2"); // HALT
+            }
+
+            #if PORYLIVE
+            ctx->scriptPtr = PoryLive_GetScriptPointer(ctx->scriptPtr);
+            #endif // PORYLIVE
 
             cmdCode = *(ctx->scriptPtr);
             ctx->scriptPtr++;
@@ -154,7 +183,12 @@ static const u8 *ScriptPop(struct ScriptContext *ctx)
 void ScriptJump(struct ScriptContext *ctx, const u8 *ptr)
 {
     assertf(ptr != NULL, "goto to NULL");
+
+    #if PORYLIVE
+    ctx->scriptPtr = PoryLive_GetScriptPointer(ptr);
+    #else
     ctx->scriptPtr = ptr;
+    #endif // PORYLIVE
 }
 
 void ScriptCall(struct ScriptContext *ctx, const u8 *ptr)
@@ -173,12 +207,22 @@ void ScriptCall(struct ScriptContext *ctx, const u8 *ptr)
         return;
     }
 
+    #if PORYLIVE
+    ScriptPush(ctx, ctx->scriptPtr);
+    ctx->scriptPtr = PoryLive_GetScriptPointer(ptr);
+    #else
+    ScriptPush(ctx, ctx->scriptPtr);
     ctx->scriptPtr = ptr;
+    #endif // PORYLIVE
 }
 
 void ScriptReturn(struct ScriptContext *ctx)
 {
+    #if PORYLIVE
     ctx->scriptPtr = ScriptPop(ctx);
+    #else
+    ctx->scriptPtr = ScriptPop(ctx);
+    #endif // PORYLIVE
 }
 
 u16 ScriptReadHalfword(struct ScriptContext *ctx)
@@ -580,6 +624,10 @@ static bool32 RunScriptImmediatelyUntilEffect_InternalLoop(struct ScriptContext 
             if (!ctx->scriptPtr)
                 return FALSE;
 
+            #if PORYLIVE
+            ctx->scriptPtr = PoryLive_GetScriptPointer(ctx->scriptPtr);
+            #endif // PORYLIVE
+
             cmdCode = *ctx->scriptPtr;
             ctx->scriptPtr++;
             func = &ctx->cmdTable[cmdCode];
@@ -594,7 +642,11 @@ static bool32 RunScriptImmediatelyUntilEffect_InternalLoop(struct ScriptContext 
             // Command which waits for a frame.
             if ((*func)(ctx))
             {
+                #if PORYLIVE
+                gScriptEffectContext->nextCmd = PoryLive_GetScriptPointer(ctx->scriptPtr);
+                #else
                 gScriptEffectContext->nextCmd = ctx->scriptPtr;
+                #endif // PORYLIVE
                 return TRUE;
             }
         }
@@ -631,7 +683,13 @@ bool32 RunScriptImmediatelyUntilEffect_Internal(u32 effects, const u8 *ptr, stru
     gRngValue = rngValue;
 
     if (result)
+    {
+        #if PORYLIVE
+        ctx->scriptPtr = PoryLive_GetScriptPointer(seCtx.nextCmd);
+        #else
         ctx->scriptPtr = seCtx.nextCmd;
+        #endif // PORYLIVE
+    }
 
     return result;
 }
