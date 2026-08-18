@@ -6377,3 +6377,9 @@ BattleScript_MoveUsedIsFrenzyPrevented::
 BattleScript_SelectingNotAllowedMoveFrenzy::
 	printselectionstring STRINGID_PKMNCANTUSEMOVEFRENZY
 	endselectionscript
+
+BattleScript_ChainLightningParalyzesPartner::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_LIGHTNINGSTRUCKPARTNER
+	call BattleScript_EffectParalyzeSide
+	return

@@ -4437,6 +4437,37 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 effect++;
             }
             break;
+        case ABILITY_FREEZING_MAW:
+            if (IsBattlerAlive(gBattlerTarget)
+             && !IsMoveEffectBlockedByTarget(GetBattlerAbility(gBattlerTarget))
+             && CanBeFrozen(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget))
+             && IsSoundMove(move)
+             && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES) // Need to actually hit the target
+             && RandomPercentage(RNG_FREEZING_MAW, 25))
+            {
+                gEffectBattler = gBattlerTarget;
+                gBattleScripting.battler = gBattlerAttacker;
+                gBattleScripting.moveEffect = MOVE_EFFECT_FREEZE;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                BattleScriptCall(BattleScript_AbilityStatusEffect);
+                effect++;
+            }
+            break;
+		case ABILITY_CHAIN_LIGHTNING:
+		    if (MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_PARALYSIS)
+			 && GetMoveType(gCurrentMove) == TYPE_ELECTRIC
+		     && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES) // Need to actually hit the target
+             && IsBattlerAlive(gBattlerTarget)
+             && CanBeParalyzed(gBattlerAttacker, gBattlerTarget, ability))
+			{
+                gEffectBattler = gBattlerTarget;
+                gBattleScripting.battler = gBattlerAttacker;
+                gBattleScripting.moveEffect = MOVE_EFFECT_PARALYZE_SIDE;
+                BattleScriptCall(BattleScript_ChainLightningParalyzesPartner);
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+				effect++;
+			}
+			break;
         default:
             break;
         }
@@ -5370,7 +5401,7 @@ bool32 CanSetNonVolatileStatus(enum BattlerId battlerAtk, enum BattlerId battler
         {
             battleScript = BattleScript_AlreadyParalyzed;
         }
-        else if (GetConfig(B_PARALYZE_ELECTRIC) >= GEN_6 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ELECTRIC))
+        else if (GetConfig(B_PARALYZE_ELECTRIC) >= GEN_6 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ELECTRIC) && abilityAtk != ABILITY_CHAIN_LIGHTNING)
         {
             battleScript = BattleScript_NotAffected;
         }

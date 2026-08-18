@@ -894,6 +894,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_RABIDFRENZYACTIVE]                    = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} became frenzied!"),
     [STRINGID_RABIDFRENZYDETERIORATED]              = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}'s mental state deteriorated!"),
     [STRINGID_PKMNCANTUSEMOVEFRENZY]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} is too frenzied to use {B_CURRENT_MOVE}!\p"),
+    [STRINGID_LIGHTNINGSTRUCKPARTNER]               = COMPOUND_STRING("{B_DEF_PARTNER_NAME} is also struck b {B_CURRENT_MOVE}!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
