@@ -2526,4 +2526,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Become frenzied on hit."),
         .aiRating = 8,
     },
+    [ABILITY_CHAIN_LIGHTNING] =
+    {
+        .name = _("Chain Lightning"),
+        .description = COMPOUND_STRING("Chain paralysis together"),
+        .aiRating = 8,
+    },
 };

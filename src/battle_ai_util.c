@@ -1129,7 +1129,7 @@ static bool32 AI_IsMoveEffectInPlus(enum BattlerId battlerAtk, enum BattlerId ba
                     return TRUE;
                 break;
             case MOVE_EFFECT_PARALYSIS:
-                if (AI_CanParalyze(battlerAtk, battlerDef, abilityDef, move, MOVE_NONE))
+                if (AI_CanParalyze(battlerAtk, battlerDef, abilityDef, abilityAtk, move, MOVE_NONE))
                     return TRUE;
                 break;
             case MOVE_EFFECT_CONFUSION:
@@ -3545,10 +3545,10 @@ bool32 ShouldFreezeOrFrostbite(enum BattlerId battlerAtk, enum BattlerId battler
     }
 }
 
-bool32 ShouldParalyze(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityDef)
+bool32 ShouldParalyze(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityDef, enum Ability abilityAtk)
 {
     // Battler can be paralyzed and has move/ability that synergizes with being paralyzed
-    if (CanBeParalyzed(battlerAtk, battlerDef, abilityDef) && (
+    if (CanBeParalyzed(battlerAtk, battlerDef, abilityDef, abilityAtk) && (
         DoesBattlerBenefitFromAllVolatileStatus(battlerDef, abilityDef)))
     {
         if (battlerAtk == battlerDef) // Targeting self
@@ -3573,9 +3573,9 @@ bool32 AI_CanPoison(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum A
     return TRUE;
 }
 
-bool32 AI_CanParalyze(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability defAbility, enum Move move, enum Move partnerMove)
+bool32 AI_CanParalyze(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability defAbility, enum Ability atkAbility, enum Move move, enum Move partnerMove)
 {
-    if (!CanBeParalyzed(battlerAtk, battlerDef, defAbility)
+    if (!CanBeParalyzed(battlerAtk, battlerDef, defAbility, atkAbility)
       || gAiLogicData->effectiveness[battlerAtk][battlerDef][gAiThinkingStruct->movesetIndex] == UQ_4_12(0.0)
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || PartnerMoveEffectIsStatusSameTarget(BATTLE_PARTNER(battlerAtk), battlerDef, partnerMove))
@@ -4861,7 +4861,7 @@ void IncreaseParalyzeScore(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             || gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_CURE_PAR || gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_CURE_STATUS)
         return;
 
-    if (AI_CanParalyze(battlerAtk, battlerDef, gAiLogicData->abilities[battlerDef], move, gAiLogicData->partnerMove))
+    if (AI_CanParalyze(battlerAtk, battlerDef, gAiLogicData->abilities[battlerDef], gAiLogicData->abilities[battlerAtk], move, gAiLogicData->partnerMove))
     {
         u32 atkSpeed = gAiLogicData->speedStats[battlerAtk];
         u32 defSpeed = gAiLogicData->speedStats[battlerDef];

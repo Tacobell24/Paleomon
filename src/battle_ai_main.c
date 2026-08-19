@@ -2122,7 +2122,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         else if (gBattleMons[battlerAtk].status1 & STATUS1_FROSTBITE && !AI_CanGiveFrostbite(battlerAtk, battlerDef,
           aiData->abilities[battlerDef], BATTLE_PARTNER(battlerAtk), move, aiData->partnerMove))
             ADJUST_SCORE(-10);
-        else if (gBattleMons[battlerAtk].status1 & STATUS1_PARALYSIS && !AI_CanParalyze(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, aiData->partnerMove))
+        else if (gBattleMons[battlerAtk].status1 & STATUS1_PARALYSIS && !AI_CanParalyze(battlerAtk, battlerDef, aiData->abilities[battlerDef], aiData->abilities[battlerAtk], move, aiData->partnerMove))
             ADJUST_SCORE(-10);
         else if (gBattleMons[battlerAtk].status1 & STATUS1_SLEEP && !AI_CanPutToSleep(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, aiData->partnerMove))
             ADJUST_SCORE(-10);
@@ -2985,9 +2985,9 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-20);
         break;
     case MOVE_EFFECT_PARALYSIS:
-        if (!AI_CanParalyze(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, aiData->partnerMove))
+        if (!AI_CanParalyze(battlerAtk, battlerDef, aiData->abilities[battlerDef], aiData->abilities[battlerAtk], move, aiData->partnerMove))
             ADJUST_SCORE(-10);
-        if (!ShouldParalyze(battlerAtk, battlerDef, aiData->abilities[battlerDef]))
+        if (!ShouldParalyze(battlerAtk, battlerDef, aiData->abilities[battlerDef], aiData->abilities[battlerAtk]))
             ADJUST_SCORE(-5);
         break;
     case MOVE_EFFECT_BURN:

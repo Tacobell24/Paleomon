@@ -6377,3 +6377,33 @@ BattleScript_MoveUsedIsFrenzyPrevented::
 BattleScript_SelectingNotAllowedMoveFrenzy::
 	printselectionstring STRINGID_PKMNCANTUSEMOVEFRENZY
 	endselectionscript
+	
+BattleScript_ChainLightning::
+	savetarget
+	copybyte sBATTLER, gEffectBattler
+	copybyte gBattlerTarget, gEffectBattler
+BattleScript_ChainLightningLoop:
+	jumpifabsent BS_TARGET, BattleScript_ChainLightningIncrement
+	jumpiftype BS_TARGET, TYPE_GROUND, BattleScript_ChainLightningFizzled
+	jumpifability BS_TARGET, ABILITY_LIMBER, BattleScript_ChainLightningFizzled
+	jumpifstatus BS_TARGET, STATUS1_POISON | STATUS1_TOXIC_POISON, BattleScript_ChainLightningFizzled
+	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_ChainLightningFizzled
+	jumpifstatus BS_TARGET, STATUS1_PARALYSIS, BattleScript_ChainLightningFizzled
+	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_ChainLightningFizzled
+	jumpifstatus BS_TARGET, STATUS1_FREEZE, BattleScript_ChainLightningFizzled
+	jumpifstatus BS_TARGET, STATUS1_FROSTBITE, BattleScript_ChainLightningFizzled
+	trysetparalysis BattleScript_ChainLightningIncrement
+BattleScript_ChainLightningIncrement:
+	jumpifbytenotequal gBattlerTarget, sBATTLER, BattleScript_ChainLightningEnd
+	jumpifnoally BS_TARGET, BattleScript_ChainLightningEnd
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_LIGHTNINGSTRUCKPARTNER
+	waitmessage B_WAIT_TIME_LONG
+	setallytonexttarget BattleScript_ChainLightningLoop
+BattleScript_ChainLightningFizzled:
+	printstring STRINGID_CHAINLIGHTNINGFIZZLED
+	waitmessage B_WAIT_TIME_LONG	
+	goto BattleScript_ChainLightningEnd
+BattleScript_ChainLightningEnd:
+	restoretarget
+	return

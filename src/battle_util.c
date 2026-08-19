@@ -4134,7 +4134,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                  && !gSpecialStatuses[gBattlerAttacker].attackerInParty
                  && !gBattleStruct->unableToUseMove
                  && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES)
-                 && CanBeParalyzed(gBattlerTarget, gBattlerAttacker, abilityAtk)
+                 && CanBeParalyzed(gBattlerTarget, gBattlerAttacker, gLastUsedAbility, abilityAtk)
                  && !CanBattlerAvoidContactEffects(gBattlerAttacker, gBattlerTarget, abilityAtk, GetBattlerHoldEffect(gBattlerAttacker), move))
                 {
                     gEffectBattler = gBattlerAttacker;
@@ -4435,6 +4435,24 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
 				BattleScriptCall(BattleScript_MoveEffectWrap);
                 BattleScriptCall(BattleScript_AbilityPopUp);
                 effect++;
+            }
+            break;
+        case ABILITY_CHAIN_LIGHTNING:
+		    if (MoveHasAdditionalEffect(gCurrentMove, MOVE_EFFECT_PARALYSIS)
+			 && GetMoveType(gCurrentMove) == TYPE_ELECTRIC
+             && !IsMoveEffectBlockedByTarget(GetBattlerAbility(gBattlerTarget))
+		     && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES) // Need to actually hit the target
+             && IsBattlerAlive(gBattlerTarget)
+             && BATTLE_PARTNER(gBattlerAttacker) != gBattlerTarget
+             && CanBeParalyzed(gBattlerAttacker, gBattlerTarget, gLastUsedAbility, GetBattlerAbility(gBattlerAttacker))
+             && RandomPercentage(RNG_CHAIN_LIGHTNING, 30))
+            {
+                gEffectBattler = gBattlerTarget;
+                gBattleScripting.battler = gBattlerAttacker;
+                gBattleScripting.moveEffect = MOVE_EFFECT_PARALYZE_SIDE;
+                BattleScriptCall(BattleScript_ChainLightning);
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+				effect++;
             }
             break;
         default:
@@ -5283,12 +5301,12 @@ bool32 CanBeBurned(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ab
     return FALSE;
 }
 
-bool32 CanBeParalyzed(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityDef)
+bool32 CanBeParalyzed(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityDef, enum Ability abilityAtk)
 {
     if (CanSetNonVolatileStatus(
             battlerAtk,
             battlerDef,
-            ABILITY_NONE, // attacker ability does not matter
+            abilityAtk,
             abilityDef,
             MOVE_EFFECT_PARALYSIS,
             CHECK_TRIGGER))
@@ -5370,7 +5388,7 @@ bool32 CanSetNonVolatileStatus(enum BattlerId battlerAtk, enum BattlerId battler
         {
             battleScript = BattleScript_AlreadyParalyzed;
         }
-        else if (GetConfig(B_PARALYZE_ELECTRIC) >= GEN_6 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ELECTRIC))
+        else if (GetConfig(B_PARALYZE_ELECTRIC) >= GEN_6 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ELECTRIC) && !(abilityAtk == ABILITY_CHAIN_LIGHTNING && GetMoveType(gCurrentMove) == TYPE_ELECTRIC))
         {
             battleScript = BattleScript_NotAffected;
         }
