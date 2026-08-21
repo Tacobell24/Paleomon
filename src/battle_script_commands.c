@@ -2580,7 +2580,14 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
         {
             enum BattlerId partnerTarget = BATTLE_PARTNER(effectBattler);
             gEffectBattler = partnerTarget;
-            SetPassiveDamageAmount(partnerTarget, gBattleMons[partnerTarget].maxHP / 16);
+			if (GetBattlerAbility(gBattlerAttacker) == ABILITY_IMMOLATION)
+			{
+                SetPassiveDamageAmount(partnerTarget, gBattleMons[partnerTarget].maxHP / 8);
+			}
+			else
+			{
+                SetPassiveDamageAmount(partnerTarget, gBattleMons[partnerTarget].maxHP / 16);
+			}
             BattleScriptPush(battleScript);
             gBattlescriptCurrInstr = BattleScript_MoveEffectFlameBurst;
         }

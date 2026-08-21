@@ -1079,6 +1079,7 @@ void CancelMultiTurnMoves(enum BattlerId battler)
     gBattleMons[battler].volatiles.bideTurns = 0;
     gBattleMons[battler].volatiles.rolloutTimer = 0;
     gBattleMons[battler].volatiles.furyCutterCounter = 0;
+    gBattleMons[battler].volatiles.immolationCounter = 0;
 
     if (B_RAMPAGE_CONFUSION < GEN_5
      || gBattleMons[battler].volatiles.rampageTurns != 1) // Will be confused at the end of the turn
@@ -4455,6 +4456,21 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
 				effect++;
             }
             break;
+        case ABILITY_IMMOLATION:
+		    if (GetMoveType(gCurrentMove) == TYPE_FIRE
+		     && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES) // Need to actually hit the target
+             && !IsDoubleSpreadMove()
+             && gCurrentMove != MOVE_FLAME_BURST
+             && BATTLE_PARTNER(gBattlerAttacker) != gBattlerTarget)
+            {
+                SetMoveEffect(gBattlerAttacker, gBattlerTarget, MOVE_EFFECT_FLAME_BURST, gBattlescriptCurrInstr, NO_FLAGS);
+                if (IsBattlerAlive(BATTLE_PARTNER(gBattlerTarget)))
+                {
+				    BattleScriptCall(BattleScript_AbilityPopUp);
+			    }
+				effect++;
+            }
+            break;
         default:
             break;
         }
@@ -5600,6 +5616,7 @@ void ClearVariousBattlerFlags(enum BattlerId battler)
     gBattleMons[battler].volatiles.destinyBond = 0;
     gBattleMons[battler].volatiles.glaiveRush = FALSE;
     gBattleMons[battler].volatiles.grudge = FALSE;
+    gBattleMons[battler].volatiles.immolationCounter = 0;
 }
 
 void HandleAction_RunBattleScript(void)
@@ -6173,6 +6190,16 @@ static inline u32 CalcFuryCutterBasePower(enum BattlerId battlerAtk, u32 basePow
     return min(basePower, 160); // The duration to reach 160 depends on a gen
 }
 
+static inline u32 CalcImmolationBasePower(enum BattlerId battlerAtk, u32 basePower)
+{
+    if (basePower > 220 || gBattleMons[battlerAtk].volatiles.immolationCounter == 0)
+		return basePower;
+
+    for (u32 i = 0; i < gBattleMons[battlerAtk].volatiles.immolationCounter; i++)
+        basePower *= 10;
+    return min(basePower, 220);
+}
+
 static inline u32 CalcTerrainBoostedPower(struct DamageContext *ctx, u32 basePower)
 {
     bool32 isTerrainAffected = FALSE;
@@ -6493,6 +6520,9 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
     default:
         break;
     }
+
+    if (GetBattlerAbility(battlerAtk) == ABILITY_IMMOLATION && GetMoveType(move) == TYPE_FIRE)
+        basePower = CalcImmolationBasePower(battlerAtk, basePower);
 
     if (basePower == 0)
         basePower = 1;

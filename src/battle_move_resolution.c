@@ -5052,6 +5052,19 @@ static void SetSameMoveTurnValues(enum BattleMoveEffects moveEffect)
         break;
     }
 
+    if (GetBattlerAbility(gBattlerAbility) == ABILITY_IMMOLATION
+	 && GetMoveType(gCurrentMove) == TYPE_FIRE)
+    {
+        if (increment && gBattleMons[gBattlerAttacker].volatiles.immolationCounter < 26)
+            gBattleMons[gBattlerAttacker].volatiles.immolationCounter++;
+        else
+            gBattleMons[gBattlerAttacker].volatiles.immolationCounter = 0;		
+	}
+    else
+	{
+        gBattleMons[gBattlerAttacker].volatiles.immolationCounter = 0;		
+	}
+
     if (increment)
         gBattleMons[gBattlerAttacker].volatiles.metronomeItemCounter++;
     else
