@@ -206,8 +206,8 @@ static const struct BattleWeatherInfo sBattleWeatherInfo[BATTLE_WEATHER_COUNT] =
     {
         .flag = B_WEATHER_FOG,
         .rock = HOLD_EFFECT_NONE,
-        .abilityStartMessage = B_MSG_STARTED_DRIZZLE, // Placeholder
-        .moveStartMessage = B_MSG_STARTED_RAIN, // Placeholder
+        .abilityStartMessage = B_MSG_STARTED_FREEZING_MAW,
+        .moveStartMessage = B_MSG_STARTED_FOG,
         .endMessage = B_MSG_WEATHER_END_FOG,
         .continuesMessage = B_MSG_WEATHER_TURN_FOG,
         .animation = B_ANIM_FOG_CONTINUES,
@@ -4469,6 +4469,36 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
 				    BattleScriptCall(BattleScript_AbilityPopUp);
 			    }
 				effect++;
+            }
+            break;
+        case ABILITY_FREEZING_MAW:
+            if (IsBattlerAlive(gBattlerTarget)
+             && !IsMoveEffectBlockedByTarget(GetBattlerAbility(gBattlerTarget))
+             && CanBeFrozen(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget))
+             && (IsSoundMove(move) || IsBitingMove(move))
+			 && GetMoveType(gCurrentMove) != TYPE_FIRE
+             && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES) // Need to actually hit the target
+             && RandomPercentage(RNG_FREEZING_MAW, 30))
+            {
+                gEffectBattler = gBattlerTarget;
+                gBattleScripting.battler = gBattlerAttacker;
+                gBattleScripting.moveEffect = MOVE_EFFECT_FREEZE;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                BattleScriptCall(BattleScript_AbilityStatusEffect);
+                effect++;
+            }
+
+			if (IsAnyTargetAffected()
+         	 && TryChangeBattleWeather(gBattlerAttacker, BATTLE_WEATHER_FOG, gLastUsedAbility)	
+	    	 && IsSoundMove(move))
+			{
+                BattleScriptCall(BattleScript_WeatherAbilityActivates);
+                effect++;
+			}
+			else if (GetWeather() & B_WEATHER_PRIMAL_ANY)
+            {
+                BattleScriptCall(BattleScript_BlockedByPrimalWeather);
+                effect++;
             }
             break;
         default:
@@ -10554,8 +10584,10 @@ u32 GetTotalAccuracy(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum 
         calc = (calc * 90) / 100;
 
     if (HasWeatherEffect() && gBattleWeather & B_WEATHER_FOG)
-        calc = (calc * 60) / 100; // modified by 3/5
-
+/*	{
+		if (gBattleMons[battlerAtk].species != SPECIES_CRYVERN)*/ //TODO: Add all Paleomon
+		    calc = (calc * 75) / 100; // modified by 3/4
+//	}
     return calc;
 }
 

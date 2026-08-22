@@ -252,6 +252,7 @@ enum RandomTag
     RNG_RANDOM_BERRY,
     RNG_RANDOM_BALL,
     RNG_CHAIN_LIGHTNING,
+    RNG_FREEZING_MAW,
 };
 
 #define RandomWeighted(tag, ...) \

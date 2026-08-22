@@ -2529,13 +2529,19 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_CHAIN_LIGHTNING] =
     {
         .name = _("Chain Lightning"),
-        .description = COMPOUND_STRING("Chain paralysis together"),
+        .description = COMPOUND_STRING("Chain paralysis together."),
         .aiRating = 8,
     },
     [ABILITY_IMMOLATION] =
     {
         .name = _("Immolation"),
-        .description = COMPOUND_STRING("Flames build up on hit"),
+        .description = COMPOUND_STRING("Flames build up on hit."),
         .aiRating = 4,
+    },
+    [ABILITY_FREEZING_MAW] =
+    {
+        .name = _("Freezing Maw"),
+        .description = COMPOUND_STRING("Mouth moves can freeze."),
+        .aiRating = 6,
     },
 };

@@ -896,6 +896,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_PKMNCANTUSEMOVEFRENZY]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} is too frenzied to use {B_CURRENT_MOVE}!\p"),
     [STRINGID_LIGHTNINGSTRUCKPARTNER]               = COMPOUND_STRING("{B_DEF_PARTNER_NAME} is also struck by {B_CURRENT_MOVE}!"),
     [STRINGID_CHAINLIGHTNINGFIZZLED]                = COMPOUND_STRING("But the lightning chain fizzled out!"),
+    [STRINGID_FOGENGULFED]                          = COMPOUND_STRING("Thick fog engulfed the battlefield!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -1031,6 +1032,7 @@ const u16 gAbilityWeatherChangeStringId[] =
     [B_MSG_STARTED_DESOLATE_LAND]  = STRINGID_EXTREMELYHARSHSUNLIGHT,
     [B_MSG_STARTED_PRIMORDIAL_SEA] = STRINGID_HEAVYRAIN,
     [B_MSG_STARTED_STRONG_WINDS]   = STRINGID_MYSTERIOUSAIRCURRENT,
+    [B_MSG_STARTED_FREEZING_MAW]   = STRINGID_FOGENGULFED,
 };
 
 const u16 gWeatherEndsStringIds[B_MSG_WEATHER_END_COUNT] =
