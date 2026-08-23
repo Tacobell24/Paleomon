@@ -2472,76 +2472,99 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Spicy Spray"),
         .description = COMPOUND_STRING("Burns the foe when damaged."),
     },
+
     [ABILITY_SPIKED_TAIL] =
     {
         .name = _("Spiked Tail"),
         .description = COMPOUND_STRING("Boosts tail moves."),
         .aiRating = 7,
     },
+
     [ABILITY_PYROMANIAC] =
     {
         .name = _("Pyromaniac"),
         .description = COMPOUND_STRING("Boosts fire at cost of HP."),
         .aiRating = 8,
     },
+
     [ABILITY_PACK_HUNTING] =
     {
         .name = _("Pack Hunting"),
         .description = COMPOUND_STRING("Enlist the pack to fight."),
         .aiRating = 4,
     },
+
     [ABILITY_HEXOSKELETON] =
     {
         .name = _("Hexoskeleton"),
         .description = COMPOUND_STRING("Curses the foe on contact."),
         .aiRating = 4,
     },
+
     [ABILITY_LONE_WOLF] =
     {
         .name = _("Lone Wolf"),
         .description = COMPOUND_STRING("Powers up if battling alone."),
         .aiRating = 8,
     },
+
     [ABILITY_EXSANGUINATE] =
     {
         .name = _("Exsanguinate"),
         .description = COMPOUND_STRING("Biting movec drain HP."),
         .aiRating = 4,
     },
+
     [ABILITY_FIGHT_OR_FLIGHT] =
     {
         .name = _("Fight or Flight"),
         .description = COMPOUND_STRING("Weaker moves go first."),
         .aiRating = 4,
     },
+
     [ABILITY_PLAGUEBORNE] =
     {
         .name = _("Plagueborne"),
         .description = COMPOUND_STRING("Bugs infest on contact."),
         .aiRating = 4,
     },
+
     [ABILITY_RABID_FRENZY] =
     {
         .name = _("Rabid Frenzy"),
         .description = COMPOUND_STRING("Become frenzied on hit."),
         .aiRating = 8,
     },
+	
     [ABILITY_CHAIN_LIGHTNING] =
     {
         .name = _("Chain Lightning"),
         .description = COMPOUND_STRING("Chain paralysis together."),
         .aiRating = 8,
     },
+
     [ABILITY_IMMOLATION] =
     {
         .name = _("Immolation"),
         .description = COMPOUND_STRING("Flames build up on hit."),
         .aiRating = 4,
     },
+
     [ABILITY_FREEZING_MAW] =
     {
         .name = _("Freezing Maw"),
         .description = COMPOUND_STRING("Mouth moves can freeze."),
         .aiRating = 6,
+    },
+
+    [ABILITY_ALTER_EGO] =
+    {
+        .name = _("Alter Ego"),
+        .description = COMPOUND_STRING("Control switches each turn."),
+        .aiRating = 2,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+        .failsOnImposter = TRUE,
     },
 };

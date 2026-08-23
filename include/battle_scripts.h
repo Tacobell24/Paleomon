@@ -510,6 +510,7 @@ extern const u8 BattleScript_RabidFrenzyDeteriorates[];
 extern const u8 BattleScript_MoveUsedIsFrenzyPrevented[];
 extern const u8 BattleScript_SelectingNotAllowedMoveFrenzy[];
 extern const u8 BattleScript_ChainLightning[];
+extern const u8 BattleScript_AlterEgo[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

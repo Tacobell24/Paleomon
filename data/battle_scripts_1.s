@@ -6407,3 +6407,12 @@ BattleScript_ChainLightningFizzled:
 BattleScript_ChainLightningEnd:
 	restoretarget
 	return
+
+BattleScript_AlterEgo::
+	flushtextbox
+	handleformchange BS_SCRIPTING, 0
+	playanimation BS_SCRIPTING, B_ANIM_FORM_CHANGE
+	handleformchange BS_SCRIPTING, 1
+	printfromtable gAlterEgoStringIds
+	waitmessage B_WAIT_TIME_LONG
+	return

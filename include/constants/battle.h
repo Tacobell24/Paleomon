@@ -329,6 +329,7 @@ enum VolatileFlags
     F(VOLATILE_ACTIVATE_DANCER,             activateDancer,                (u32, 1)) \
     F(VOLATILE_FRENZIED,                    frenzied,                      (u32, 1)) \
     F(VOLATILE_IMMOLATION_COUNTER,          immolationCounter,             (u32, UINT8_MAX)) \
+    F(VOLATILE_ALTER_EGO_STATE,             alterEgoState,                 (u32, 1)) \
     F(VOLATILE_TRACE_ACTIVATED,             traceActivated,                (u32, 1))
 
 

@@ -2568,3 +2568,9 @@ static const u16 sTerapagosFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 #endif //P_FAMILY_TERAPAGOS
+
+static const u16 sBiteumenFormSpeciesIdTable[] = {
+    SPECIES_MORPEKO_FULL_BELLY,//SPECIES_BITEUMEN_FEATHER,
+    SPECIES_MORPEKO_HANGRY,//SPECIES_BITEUMEN_TAR,
+    FORM_SPECIES_END,
+};

@@ -897,6 +897,8 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_LIGHTNINGSTRUCKPARTNER]               = COMPOUND_STRING("{B_DEF_PARTNER_NAME} is also struck by {B_CURRENT_MOVE}!"),
     [STRINGID_CHAINLIGHTNINGFIZZLED]                = COMPOUND_STRING("But the lightning chain fizzled out!"),
     [STRINGID_FOGENGULFED]                          = COMPOUND_STRING("Thick fog engulfed the battlefield!"),
+    [STRINGID_HOSTARLESIEZEDCONTROL]                = COMPOUND_STRING("Hostarle siezed control of Biteumen's mind!"),
+    [STRINGID_PLUVENILEREGAINEDCONTROL]             = COMPOUND_STRING("Pluvenile regained control of Biteumen's mind!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -1555,6 +1557,12 @@ const u8 *const gRefereeStringsTable[] =
     [B_MSG_REF_OPPONENT_WON]       = COMPOUND_STRING("REFEREE: Judgment: {B_BUFF1} to {B_BUFF2}! The winner is {B_TRAINER1_NAME}'s {B_OPPONENT_MON1_NAME}!\p"),
     [B_MSG_REF_DRAW]               = COMPOUND_STRING("REFEREE: Judgment: 3 to 3! We have a draw!\p"),
     [B_MSG_REF_COMMENCE_BATTLE]    = COMPOUND_STRING("REFEREE: {B_PLAYER_MON1_NAME} VS {B_OPPONENT_MON1_NAME}! Commence battling!"),
+};
+
+const u16 gAlterEgoStringIds[] =
+{
+    [B_MSG_ALTER_EGO_TAR] = STRINGID_HOSTARLESIEZEDCONTROL,
+    [B_MSG_ALTER_EGO_FEATHER] = STRINGID_PLUVENILEREGAINEDCONTROL,
 };
 
 static const u8 sText_Trainer1Fled[] = _( "{PLAY_SE SE_FLEE}{B_TRAINER1_NAME_WITH_CLASS} fled!");

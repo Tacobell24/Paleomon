@@ -1416,6 +1416,13 @@ static bool32 HandleEndTurnFormChange(enum BattlerId battler)
         default:
             BattleScriptCall(BattleScript_BattlerFormChange); // Generic animation
             break;
+        case ABILITY_ALTER_EGO:
+            if (gBattleMons[battler].species == SPECIES_MORPEKO_HANGRY)//SPECIES_BITEUMEN_TAR)
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ALTER_EGO_TAR;
+            else
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ALTER_EGO_FEATHER;
+            BattleScriptCall(BattleScript_AlterEgo);
+            break;
         }
         effect = TRUE;
     }
