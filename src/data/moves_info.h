@@ -21997,7 +21997,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     },
 
     // Custom Moves
-	    [MOVE_PLAGUEBORNE_PROXY] =
+	[MOVE_PLAGUEBORNE_PROXY] =
     {
         .name = COMPOUND_STRING("Plague"),
         .description = COMPOUND_STRING(

@@ -4421,6 +4421,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             break;
         case ABILITY_PLAGUEBORNE:
             if (IsBattlerAlive(gBattlerTarget)
+             && !IsBattlerUnaffectedByMove(gBattlerTarget)
              && !gBattleStruct->unableToUseMove
              && !(gBattleMons[gBattlerTarget].volatiles.wrapped)
              && !IsMoveEffectBlockedByTarget(GetBattlerAbility(gBattlerTarget))
