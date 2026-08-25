@@ -3141,6 +3141,7 @@ BattleScript_WeatherAbilityActivates::
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
 	jumpifability BS_SCRIPTING, ABILITY_SAND_SPIT, BattleScript_SandSpitActivates
+	jumpifability BS_SCRIPTING, ABILITY_FREEZING_MAW, BattleScript_FreezingMawActivates
 	printfromtable gAbilityWeatherChangeStringId
 BattleScript_WeatherAbilityActivatesContinue:
 	waitstate
@@ -3152,6 +3153,10 @@ BattleScript_SandSpitActivates::
 	printstring STRINGID_ASANDSTORMKICKEDUP
 	goto BattleScript_WeatherAbilityActivatesContinue
 
+BattleScript_FreezingMawActivates::
+	printstring STRINGID_FOGENGULFED
+	goto BattleScript_WeatherAbilityActivatesContinue
+	
 BattleScript_OrichalcumPulseActivates::
 	pause B_WAIT_TIME_SHORT
 	copybyte sSAVED_BATTLER, sBATTLER

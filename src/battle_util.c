@@ -4488,10 +4488,12 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
                 effect++;
             }
 
-			if (IsAnyTargetAffected()
-         	 && TryChangeBattleWeather(gBattlerAttacker, BATTLE_WEATHER_FOG, gLastUsedAbility)	
-	    	 && IsSoundMove(move))
+            if (!IsBattlerUnaffectedByMove(gBattlerTarget)
+			 && !(GetWeather() & B_WEATHER_FOG)
+			 && IsSoundMove(move))
 			{
+                gBattleScripting.battler = gBattlerAttacker;
+         	    TryChangeBattleWeather(gBattlerAttacker, BATTLE_WEATHER_FOG, ABILITY_NONE);	
                 BattleScriptCall(BattleScript_WeatherAbilityActivates);
                 effect++;
 			}
