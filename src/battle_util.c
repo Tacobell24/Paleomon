@@ -6550,6 +6550,10 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
     case EFFECT_SPECIES_POWER_OVERRIDE:
         if (gBattleMons[battlerAtk].species == GetMoveSpeciesPowerOverride_Species(ctx->move))
             basePower = GetMoveSpeciesPowerOverride_Power(ctx->move);
+    case EFFECT_SUCCULENT_EGG:
+        if (!IsBattlerAtMaxHp(battlerAtk))
+            basePower = uq4_12_multiply(basePower, UQ_4_12(0.75));
+        break;
     default:
         break;
     }

@@ -22023,6 +22023,28 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Infestation,
     },
 	
+    [MOVE_SUCCULENT_EGG] =
+    {
+        .name = COMPOUND_STRING("Succulent Egg"),
+        .description = COMPOUND_STRING(
+            "Sacrifice power to heal by\n"
+            "eating some tasty egg."),
+        .effect = EFFECT_SUCCULENT_EGG,
+        .power = 80,
+        .type = TYPE_NORMAL,//BONE, TODO: Implement Bone Type
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .ballisticMove = TRUE,
+        .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
+        .contestCategory = C_UPDATED_MOVE_CATEGORIES >= GEN_6 ? CONTEST_CATEGORY_CUTE : CONTEST_CATEGORY_TOUGH,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {COMBO_STARTER_SOFT_BOILED},
+        .battleAnimScript = gBattleAnimMove_SucculentEgg,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

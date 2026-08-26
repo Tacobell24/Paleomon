@@ -6421,3 +6421,31 @@ BattleScript_AlterEgo::
 	printfromtable gAlterEgoStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
+
+BattleScript_MoveEffectSucculentEgg::
+	attackcanceler
+	copybyte gEffectBattler, gBattlerAttacker
+	setpreattackadditionaleffect
+	damagecalc
+	tryhealquarterhealth BS_ATTACKER, BattleScript_SucculentEggAttack
+	attackanimation
+	waitanimation
+	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	printstring STRINGID_PKMNATESOMEEGG
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_SucculentEggAttack::
+    playmoveanimation MOVE_EGG_BOMB
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET, MOVE_DAMAGE_HP_UPDATE
+	datahpupdate BS_TARGET, MOVE_DAMAGE_HP_UPDATE
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	setadditionaleffects
+	moveendall
+	end

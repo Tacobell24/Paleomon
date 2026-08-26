@@ -909,6 +909,7 @@ enum __attribute__((packed)) Move
 
     // Custom Moves
 	MOVE_PLAGUEBORNE_PROXY = MOVES_COUNT_GEN9,
+    MOVE_SUCCULENT_EGG = 849,
 	MOVES_COUNT_CUSTOM,
     
 	MOVES_COUNT = MOVES_COUNT_CUSTOM,
