@@ -941,6 +941,7 @@ extern const u8 gBattleAnimMove_GMaxRapidFlow[];
 // custom moves
 extern const u8 gBattleAnimMove_SucculentEgg[];
 extern const u8 gBattleAnimMove_ToothAndClaw[];
+extern const u8 gBattleAnimMove_IcyFlameFist[];
 
 // status animations
 extern const u8 gBattleAnimStatus_Poison[];
