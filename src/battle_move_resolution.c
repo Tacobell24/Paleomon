@@ -2730,17 +2730,15 @@ static enum MoveEndResult MoveEndAbsorb(struct BattleCalcValues *cv)
 
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_EXSANGUINATE
      && gBattleStruct->moveDamage[gBattlerTarget] > 0
-     && IsBattlerTurnDamaged(gBattlerTarget, INCLUDING_SUBSTITUTES)
+     && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES)
      && IsBattlerAlive(gBattlerAttacker)
+	 && !IsBattlerAtMaxHp(gBattlerAttacker)
 	 && IsBitingMove(gCurrentMove))
     {
         s32 healAmount = (gBattleStruct->moveDamage[gBattlerTarget] / 2);
         SetHealScript(cv, healAmount);
+        BattleScriptCall(BattleScript_Exsanguination);
         result = MOVEEND_RESULT_RUN_SCRIPT;
-        if (!IsBattlerAtMaxHp(gBattlerAttacker))
-		{
-            BattleScriptCall(BattleScript_AbilityPopUp);
-		}
     }
 
     gBattleScripting.moveendState++;

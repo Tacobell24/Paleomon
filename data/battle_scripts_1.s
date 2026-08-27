@@ -6361,6 +6361,13 @@ BattleScript_SilphScopeUnveiled::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
+BattleScript_Exsanguination::
+	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_ExsanguinationRet
+	call BattleScript_AbilityPopUp
+	playmoveanimation MOVE_ABSORB
+BattleScript_ExsanguinationRet:
+	return
+	
 BattleScript_RabidFrenzyActivates::
 	call BattleScript_AbilityPopUp
 	volatileanimation BS_TARGET, VOLATILE_FRENZIED
