@@ -3304,7 +3304,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "the foe."),
         .effect = EFFECT_HIT,
         .power = 100,
-        .type = TYPE_NORMAL,
+        .type = TYPE_BONE,
         .accuracy = 75,
         .pp = 10,
         .target = TARGET_SELECTED,
@@ -3404,7 +3404,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "May cause flinching."),
         .effect = EFFECT_HIT,
         .power = 65,
-        .type = TYPE_GROUND,
+        .type = TYPE_BONE,
         .accuracy = 85,
         .pp = 20,
         .target = TARGET_SELECTED,
@@ -3534,7 +3534,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "attacks on the next turn."),
         .effect = EFFECT_TWO_TURNS_ATTACK,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 130 : 100,
-        .type = TYPE_NORMAL,
+        .type = TYPE_BONE,
         .accuracy = 100,
         .pp = B_UPDATED_MOVE_DATA >= GEN_6 ? 10 : 15,
         .target = TARGET_SELECTED,
@@ -4223,7 +4223,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "that strikes twice."),
         .effect = EFFECT_HIT,
         .power = 50,
-        .type = TYPE_GROUND,
+        .type = TYPE_BONE,
         .accuracy = 90,
         .pp = 10,
         .target = TARGET_SELECTED,
@@ -5438,7 +5438,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "in hand 2 to 5 times."),
         .effect = EFFECT_HIT,
         .power = 25,
-        .type = TYPE_GROUND,
+        .type = TYPE_BONE,
         .accuracy = B_UPDATED_MOVE_DATA >= GEN_5 ? 90 : 80,
         .pp = 10,
         .target = TARGET_SELECTED,
@@ -13440,7 +13440,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Speed, but drops Def/Sp.Def."),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
-        .type = TYPE_NORMAL,
+        .type = TYPE_BONE,
         .accuracy = 0,
         .pp = 15,
         .target = TARGET_USER,
@@ -17543,7 +17543,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Strikes with a haunted\n"
             "bone. Might drop Defense."),
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_TWO_TYPED_MOVE,
         .power = 85,
         .type = TYPE_GHOST,
         .accuracy = 100,
@@ -17551,6 +17551,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument = { .type = TYPE_BONE },
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_STAT_MINUS,
             .defense = 1,
@@ -22031,7 +22032,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "eating some tasty egg."),
         .effect = EFFECT_SUCCULENT_EGG,
         .power = 80,
-        .type = TYPE_NORMAL,//BONE, TODO: Implement Bone Type
+        .type = TYPE_BONE,
         .accuracy = 100,
         .pp = 15,
         .target = TARGET_SELECTED,
@@ -22390,6 +22391,23 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .battleAnimScript = gBattleAnimMove_TwinkleTackle,
+    },
+    // Custom Z-Moves
+    [MOVE_SKELETAL_SMASH] =
+    {
+        .name = COMPOUND_STRING("Skeletal Smash"),
+        .description = COMPOUND_STRING(
+            "Hurls a barrage of bones at\n"
+            "the foe. Power varies."),
+        .effect = EFFECT_HIT,
+        .power = 1,
+        .type = TYPE_BONE,
+        .accuracy = 0,
+        .pp = 1,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .battleAnimScript = gBattleAnimMove_SkeletalSmash,
     },
     [MOVE_CATASTROPIKA] =
     {
@@ -23550,7 +23568,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .battleAnimScript = gBattleAnimMove_GMaxTartness,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = STAT_CHANGE_EFFECT_MINUS,
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
             .evasion = 1,
             .onSide = TRUE,
         }),

@@ -936,6 +936,8 @@ enum __attribute__((packed)) Move
     MOVE_DEVASTATING_DRAKE,
     MOVE_BLACK_HOLE_ECLIPSE,
     MOVE_TWINKLE_TACKLE,
+    // Custom Z Moves
+    MOVE_SKELETAL_SMASH,
     // Signature Z Moves
     MOVE_CATASTROPIKA,
     MOVE_10000000_VOLT_THUNDERBOLT,

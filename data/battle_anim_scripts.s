@@ -35715,3 +35715,71 @@ gBattleAnimMove_IcyFlameFist::
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
+
+gBattleAnimMove_SkeletalSmash::
+	createvisualtask AnimTask_AllBattlersInvisibleExceptAttackerAndTarget, 10
+	waitforvisualfinish
+	call EndureEffect
+	loopsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER 9 2
+	blend_color_cycle selector=F_PAL_ATTACKER, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=11, color=RGB_WHITE
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
+	call EndureEffect
+	waitforvisualfinish
+	fadetobg BG_ROCK_WRECKER
+	waitbgfadeout
+	createvisualtask AnimTask_StartSlidingBg, 5, 2048, 0, 0, -1
+	waitbgfadein
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_STRING_SHOT2, SOUND_PAN_TARGET
+	call SkeletalSmashBones
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, 0, 0, 10
+	delay 10
+	create_basic_hitsplat_sprite ANIM_TARGET, 2, x=-4, y=-0, relative_to=1, animation=2
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 21, -13, 10
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	delay 10
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, 21, -13, 42, 0, 10
+	delay 25
+	waitforvisualfinish
+	blendoff
+	clearmonbg ANIM_DEF_PARTNER
+	createvisualtask AnimTask_AllBattlersVisible, 10
+	waitforvisualfinish
+	call UnsetPsychicBg
+	end
+SkeletalSmashBones:
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, 0, 0, 15
+	delay 15
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, 42, -25, 0, 0, 15
+	delay 15
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, 0, 0, 15
+	delay 13
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, 42, -25, 0, 0, 15
+	delay 13
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, 0, 0, 15
+	delay 11
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, 42, -25, 0, 0, 15
+	delay 11
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, 0, 0, 15
+	delay 9
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, 42, -25, 0, 0, 15
+	delay 9
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, 0, 0, 15
+	delay 7
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, 42, -25, 0, 0, 15
+	delay 7
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, 0, 0, 15
+	delay 5
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, 42, -25, 0, 0, 15
+	delay 5
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, -42, -25, 15
+	delay 15	
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, -42, -25, 15
+	delay 15
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, -42, -25, 15
+	delay 15
+	createsprite gSpinningBoneSpriteTemplate, ANIM_ATTACKER, 2, -42, -25, -42, -25, 15
+	delay 15
+	return

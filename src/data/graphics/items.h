@@ -659,6 +659,7 @@ const u16 gItemIconPalette_DracoPlate[] = INCGFX_U16("graphics/items/icon_palett
 const u16 gItemIconPalette_DreadPlate[] = INCGFX_U16("graphics/items/icon_palettes/dread_plate.pal", ".gbapal");
 const u16 gItemIconPalette_IronPlate[] = INCGFX_U16("graphics/items/icon_palettes/iron_plate.pal", ".gbapal");
 const u16 gItemIconPalette_PixiePlate[] = INCGFX_U16("graphics/items/icon_palettes/pixie_plate.pal", ".gbapal");
+const u16 gItemIconPalette_BonyPlate[] = INCGFX_U16("graphics/items/icon_palettes/bony_plate.pal", ".gbapal");
 
 // Drives
 
@@ -1032,6 +1033,7 @@ const u16 gItemIconPalette_DragonGem[] = INCGFX_U16("graphics/items/icon_palette
 const u16 gItemIconPalette_DarkGem[] = INCGFX_U16("graphics/items/icon_palettes/dark_gem.pal", ".gbapal");
 const u16 gItemIconPalette_SteelGem[] = INCGFX_U16("graphics/items/icon_palettes/steel_gem.pal", ".gbapal");
 const u16 gItemIconPalette_FairyGem[] = INCGFX_U16("graphics/items/icon_palettes/fairy_gem.pal", ".gbapal");
+const u16 gItemIconPalette_BoneGem[] = INCGFX_U16("graphics/items/icon_palettes/bone_gem.pal", ".gbapal");
 
 // Z-Crystals
 
@@ -1139,6 +1141,9 @@ const u16 gItemIconPalette_PikashuniumZ[] = INCGFX_U16("graphics/items/icon_pale
 
 const u32 gItemIcon_UltranecroziumZ[] = INCGFX_U32("graphics/items/icons/ultranecrozium_z.png", ".4bpp.smol");
 const u16 gItemIconPalette_UltranecroziumZ[] = INCGFX_U16("graphics/items/icon_palettes/ultranecrozium_z.pal", ".gbapal");
+
+const u32 gItemIcon_BoniniumZ[] = INCGFX_U32("graphics/items/icons/boninium_z.png", ".4bpp.smol");
+const u16 gItemIconPalette_BoniniumZ[] = INCGFX_U16("graphics/items/icon_palettes/boninium_z.pal", ".gbapal");
 
 // Species-specific Held Items
 
@@ -1292,6 +1297,9 @@ const u32 gItemIcon_BlackGlasses[] = INCGFX_U32("graphics/items/icons/black_glas
 
 const u32 gItemIcon_MetalCoat[] = INCGFX_U32("graphics/items/icons/metal_coat.png", ".4bpp.smol");
 const u16 gItemIconPalette_MetalCoat[] = INCGFX_U16("graphics/items/icon_palettes/metal_coat.pal", ".gbapal");
+
+const u32 gItemIcon_FangNecklace[] = INCGFX_U32("graphics/items/icons/fang_necklace.png", ".4bpp.smol");
+const u16 gItemIconPalette_FangNecklace[] = INCGFX_U16("graphics/items/icon_palettes/fang_necklace.pal", ".gbapal");
 
 // Choice Items
 
@@ -1719,6 +1727,9 @@ const u16 gItemIconPalette_KeeBerry[] = INCGFX_U16("graphics/items/icon_palettes
 const u32 gItemIcon_MarangaBerry[] = INCGFX_U32("graphics/items/icons/maranga_berry.png", ".4bpp.smol");
 const u16 gItemIconPalette_MarangaBerry[] = INCGFX_U16("graphics/items/icon_palettes/maranga_berry.pal", ".gbapal");
 
+const u32 gItemIcon_MandiBerry[] = INCGFX_U32("graphics/items/icons/mandi_berry.png", ".4bpp.smol");
+const u16 gItemIconPalette_MandiBerry[] = INCGFX_U16("graphics/items/icon_palettes/mandi_berry.pal", ".gbapal");
+
 // TMs/HMs
 
 const u32 gItemIcon_TM[] = INCGFX_U32("graphics/items/icons/tm.png", ".4bpp.smol");
@@ -1762,6 +1773,8 @@ const u16 gItemIconPalette_SteelTMHM[] = INCGFX_U16("graphics/items/icon_palette
 const u16 gItemIconPalette_MysteryTMHM[] = INCGFX_U16("graphics/items/icon_palettes/mystery_tm_hm.pal", ".gbapal");
 
 const u16 gItemIconPalette_FairyTMHM[] = INCGFX_U16("graphics/items/icon_palettes/fairy_tm_hm.pal", ".gbapal");
+
+const u16 gItemIconPalette_BoneTMHM[] = INCGFX_U16("graphics/items/icon_palettes/bone_tm_hm.pal", ".gbapal");
 
 // Charms
 
