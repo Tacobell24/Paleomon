@@ -2567,4 +2567,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeTraced = TRUE,
         .failsOnImposter = TRUE,
     },
+
+    [ABILITY_SKELETATE] =
+    {
+        .name = _("Skeletate"),
+        .description = COMPOUND_STRING("Normal moves become Bone."),
+        .aiRating = 8,
+    },
 };
