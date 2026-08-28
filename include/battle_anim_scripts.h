@@ -943,6 +943,7 @@ extern const u8 gBattleAnimMove_SucculentEgg[];
 extern const u8 gBattleAnimMove_ToothAndClaw[];
 extern const u8 gBattleAnimMove_IcyFlameFist[];
 extern const u8 gBattleAnimMove_SkeletalSmash[];
+extern const u8 gBattleAnimMove_FlameBreath[];
 
 // status animations
 extern const u8 gBattleAnimStatus_Poison[];
