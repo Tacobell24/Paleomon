@@ -22128,6 +22128,28 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_FlameBreath,
     },
 
+    [MOVE_ICE_BREATH] =
+    {
+        .name = COMPOUND_STRING("Ice Breath"),
+        .description = COMPOUND_STRING(
+            "Does double damage if the\n"
+            "foe is frozen or frostbitten."),
+        .effect = EFFECT_DOUBLE_POWER_ON_ARG_STATUS,
+        .power = 70,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = { .status = STATUS1_ICY_ANY },
+        .contestEffect = CONTEST_EFFECT_BETTER_IF_SAME_TYPE,
+        .contestCategory = CONTEST_CATEGORY_BEAUTY,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_IceBreath,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
