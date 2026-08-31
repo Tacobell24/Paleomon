@@ -22178,6 +22178,39 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_BoltBreath,
     },
 
+    [MOVE_BREATH_OF_DECAY] =
+    {
+        .name = COMPOUND_STRING("Breath of Decay"),
+        .description = COMPOUND_STRING(
+            "An attack that may lower\n"
+            "all of the foe's stats."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_BONE,
+        .accuracy = 100,
+        .pp = 5,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .makesContact = B_UPDATED_MOVE_DATA < GEN_4,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
+            .attack = 1,
+            .defense = 1,
+            .spDef = 1,
+            .spAtk = 1,
+            .speed = 1,
+            .accuracy = 1,
+            .evasion = 1,
+            .chance = 15,
+        }),
+        .contestEffect = CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS,
+        .contestCategory = CONTEST_CATEGORY_SMART,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_BreathOfDecay,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

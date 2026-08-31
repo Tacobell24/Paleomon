@@ -35917,3 +35917,31 @@ BoltBreathBeam:
 	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -10
 	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 10
 	return
+
+gBattleAnimMove_BreathOfDecay::
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_FLYING_DIRT, 0, 6, 6, RGB_BLACK
+	createvisualtask AnimTask_LoadSandstormBackground, 5, TRUE
+	createvisualtask AnimTask_BlendBackground, 6, 6, RGB_BLACK
+	panse SE_M_HYDRO_PUMP, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 3, 0, 37, 1
+	call DecayBreath
+	blend_color_cycle selector=F_PAL_TARGET, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=11, color=RGB_WHITE
+	delay 3
+	call DecayBreath
+	call DecayBreath
+	call DecayBreath
+	call DecayBreath
+	call DecayBreath
+	call DecayBreath
+	call DecayBreath	
+	waitforvisualfinish
+	blendoff
+	end
+DecayBreath:
+	createsprite gMudSlapMudSpriteTemplate, ANIM_TARGET, 2, 10, -5, 20, 0, 0
+	createsprite gMudSlapMudSpriteTemplate, ANIM_TARGET, 2, 10, -5, 20, 10, 5
+	createsprite gMudSlapMudSpriteTemplate, ANIM_TARGET, 2, 10, -5, 20, -10, -5
+	createsprite gMudSlapMudSpriteTemplate, ANIM_TARGET, 2, 10, -5, 20, 20, 10
+	createsprite gMudSlapMudSpriteTemplate, ANIM_TARGET, 2, 10, -5, 20, -20, -10
+	delay 2
+	return
