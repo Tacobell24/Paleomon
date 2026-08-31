@@ -35853,3 +35853,67 @@ IceBreathCrystals:
 	createsprite gIceBeamOuterCrystalSpriteTemplate, ANIM_ATTACKER, 2, 20, 12, 0, 12, 20
 	delay 15
 	return
+	
+gBattleAnimMove_BoltBreath::
+	loopsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER, 10, 12
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_BG | F_PAL_BATTLERS_2), 2, 0, 4, RGB_YELLOW
+	waitforvisualfinish
+	createvisualtask AnimTask_CreateIons, 2, 0, 3, 120
+	createvisualtask AnimTask_CreateIons, 2, 0, 3, 120
+	delay 10
+	call BoltBreathBeam
+	delay 30
+	call ElectricityEffect
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_BG | F_PAL_BATTLERS_2), 2, 4, 0, RGB_YELLOW
+	waitforvisualfinish
+	end
+BoltBreathBeam:
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 12
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 12
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 12
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 12
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -12
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 12
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 14
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -14
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 14
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 14
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -14
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 14
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 14
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -14
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 14
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 14
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -14
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 14
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 10
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -10
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 10
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 10
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -10
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 10
+	delay 2
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 12, 0, 0, 10
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, 0, 0, 0, -10
+	createsprite gSparkBeamSpriteTemplate, ANIM_ATTACKER, -5, -12, 0, 0, 10
+	return

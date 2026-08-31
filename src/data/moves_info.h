@@ -22150,6 +22150,34 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_IceBreath,
     },
 
+    [MOVE_BOLT_BREATH] =
+    {
+        .name = COMPOUND_STRING("Bolt Breath"),
+        .description = COMPOUND_STRING(
+            "Shocks the foe, eliminating\n"
+            "stat changes. Can paralyze."),
+        .effect = EFFECT_HIT,
+        .power = 50,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 0,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PARALYSIS,
+            .chance = 10,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_CLEAR_SMOG,
+        }),
+        .contestEffect = CONTEST_EFFECT_BETTER_IF_FIRST,
+        .contestCategory = CONTEST_CATEGORY_BEAUTY,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_BoltBreath,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
