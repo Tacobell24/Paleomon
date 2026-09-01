@@ -35945,3 +35945,21 @@ DecayBreath:
 	createsprite gMudSlapMudSpriteTemplate, ANIM_TARGET, 2, 10, -5, 20, -20, -10
 	delay 2
 	return
+
+gBattleAnimMove_Thagomize::
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_WindUpLunge, 5, ANIM_ATTACKER, -24, 8, 23, 10, 40, 10
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 3, 0, 37, 1
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
+	complex_palette_blend selector=F_PAL_BG | F_PAL_BATTLERS, delay=5, num_blends=1, color1=RGB_WHITE, blend_y1=10, color2=RGB_BLACK, blend_y2=0
+	createsprite gKnockOffStrikeSpriteTemplate, ANIM_TARGET, 2, -16, -16
+	delay 5
+	call SetImpactBackground
+	create_basic_hitsplat_sprite ANIM_TARGET, 3, x=0, y=0, relative_to=ANIM_TARGET, animation=2
+@	playse SE_BANG
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	restorebg
+	waitbgfadein
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0, 5
+	end
