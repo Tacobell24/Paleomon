@@ -149,7 +149,8 @@ struct MoveInfo
     bool32 noAffectOnSameTypeTarget:1; // Fails if target is of same type as move
     bool32 accIncreaseByTenOnSameType:1; // Accuracy is increased by 10% if user is of same type as move
     bool32 tailMove:1;
-    bool32 padding1:14;
+    bool32 breathMove:1;
+    bool32 padding1:13;
     // end of word
 
     // Ban flags
@@ -416,6 +417,11 @@ static inline bool32 IsHealingMove(enum Move moveId)
 static inline bool32 IsTailMove(enum Move moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].tailMove;
+}
+
+static inline bool32 IsBreathMove(enum Move moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].breathMove;
 }
 
 static inline bool32 MoveIncreasesPowerToMinimizedTargets(enum Move moveId)

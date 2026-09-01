@@ -2289,6 +2289,11 @@ bool32 CanAbilityAbsorbMove(struct DamageContext *ctx)
                 battleScript = BattleScript_AbilityProtectedTarget;
         }
         break;
+    case ABILITY_BATTLE_ARMOR:
+    case ABILITY_SHELL_ARMOR:
+        if (IsBreathMove(ctx->move))
+            battleScript = BattleScript_AbilityProtectedTarget;
+        break;
     default:
         break;
     }
@@ -4476,10 +4481,10 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             if (IsBattlerAlive(gBattlerTarget)
              && !IsMoveEffectBlockedByTarget(GetBattlerAbility(gBattlerTarget))
              && CanBeFrozen(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget))
-             && (IsSoundMove(move) || IsBitingMove(move))
+             && (IsSoundMove(move) || IsBitingMove(move) || IsBreathMove(move))
 			 && GetMoveType(gCurrentMove) != TYPE_FIRE
              && IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES) // Need to actually hit the target
-             && RandomPercentage(RNG_FREEZING_MAW, 30))
+             && RandomPercentage(RNG_FREEZING_MAW, 20))
             {
                 gEffectBattler = gBattlerTarget;
                 gBattleScripting.battler = gBattlerAttacker;
@@ -4491,7 +4496,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
 
             if (!IsBattlerUnaffectedByMove(gBattlerTarget)
 			 && !(GetWeather() & B_WEATHER_FOG)
-			 && IsSoundMove(move))
+			 && (IsSoundMove(move) || IsBreathMove(move)))
 			{
                 gBattleScripting.battler = gBattlerAttacker;
          	    TryChangeBattleWeather(gBattlerAttacker, BATTLE_WEATHER_FOG, ABILITY_NONE);	
