@@ -2574,4 +2574,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Normal moves become Bone."),
         .aiRating = 8,
     },
+
+    [ABILITY_ANTITHESIS] =
+    {
+        .name = _("Antithesis"),
+        .description = COMPOUND_STRING("Inverts type matchups."),
+        .aiRating = 10,
+    },
 };

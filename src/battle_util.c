@@ -8275,9 +8275,39 @@ s32 CalculateMoveDamageVars(struct DamageContext *ctx)
     return DoMoveDamageCalcVars(ctx);
 }
 
+static uq4_12_t GetInverseTypeMultiplier(uq4_12_t multiplier)
+{
+    switch (multiplier)
+    {
+    case UQ_4_12(0.0):
+    case UQ_4_12(0.5):
+        return UQ_4_12(2.0);
+    case UQ_4_12(2.0):
+        return UQ_4_12(0.5);
+    case UQ_4_12(1.0):
+    default:
+        return UQ_4_12(1.0);
+    }
+}
+
+static bool32 IsAntithesisAffectingMatchups(struct DamageContext *ctx)
+{
+    bool32 antithesis = FALSE;
+	
+	if (ctx->abilities[ctx->battlerAtk] == ABILITY_ANTITHESIS)
+		antithesis = !antithesis; //Set the previously FALSE antithesis bool to TRUE instead
+	if (ctx->abilities[ctx->battlerDef] == ABILITY_ANTITHESIS)
+		antithesis = !antithesis; //Set the previously FALSE antithesis bool to TRUE instead
+
+    return antithesis;
+}
+
 static inline void MulByTypeEffectiveness(struct DamageContext *ctx, uq4_12_t *modifier, enum Type defType)
 {
     uq4_12_t mod = GetTypeModifier(ctx->moveType, defType);
+
+    if (IsAntithesisAffectingMatchups(ctx))
+		mod = GetInverseTypeMultiplier(mod);
 
     if (mod == UQ_4_12(0.0) && ctx->holdEffects[ctx->battlerDef] == HOLD_EFFECT_RING_TARGET)
     {
@@ -8391,6 +8421,7 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct DamageCont
 
     bool32 isPresentHealing = GetMoveEffect(ctx->move) == EFFECT_PRESENT && gBattleStruct->presentBasePower == 0;
     bool32 ignoreTypeCalc = isPresentHealing || GetMoveCategory(ctx->move) == DAMAGE_CATEGORY_STATUS;
+    bool32 antithesis = IsAntithesisAffectingMatchups(ctx);
     if (ignoreTypeCalc && ctx->move != MOVE_THUNDER_WAVE)
     {
         modifier = UQ_4_12(1.0);
@@ -8398,6 +8429,7 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct DamageCont
             modifier = UQ_4_12(0.0);
     }
     else if (ctx->moveType == TYPE_GROUND
+        && !(antithesis && IS_BATTLER_OF_TYPE(ctx->battlerDef, TYPE_FLYING) && !IsBattlerUngroundedByAbilityItemOrEffect(ctx->battlerDef, ctx->abilities[ctx->battlerDef], ctx->holdEffects[ctx->battlerDef]))
         && !IsBattlerGroundedInverseCheck(ctx->battlerDef, ctx->abilities[ctx->battlerDef], ctx->holdEffects[ctx->battlerDef], INVERSE_BATTLE, ctx->isAnticipation)
         && !(MoveIgnoresTypeIfFlyingAndUngrounded(ctx->move))
         && !(ctx->holdEffects[ctx->battlerDef] == HOLD_EFFECT_RING_TARGET && IS_BATTLER_OF_TYPE(ctx->battlerDef, TYPE_FLYING) && !IsBattlerUngroundedByAbilityItemOrEffect(ctx->battlerDef, ctx->abilities[ctx->battlerDef], ctx->holdEffects[ctx->battlerDef])))
@@ -8502,21 +8534,6 @@ uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(enum Move move, enum Species sp
     }
 
     return modifier;
-}
-
-static uq4_12_t GetInverseTypeMultiplier(uq4_12_t multiplier)
-{
-    switch (multiplier)
-    {
-    case UQ_4_12(0.0):
-    case UQ_4_12(0.5):
-        return UQ_4_12(2.0);
-    case UQ_4_12(2.0):
-        return UQ_4_12(0.5);
-    case UQ_4_12(1.0):
-    default:
-        return UQ_4_12(1.0);
-    }
 }
 
 uq4_12_t GetOverworldTypeEffectiveness(struct Pokemon *mon, enum Type moveType)
