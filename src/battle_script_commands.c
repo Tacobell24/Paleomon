@@ -13146,17 +13146,20 @@ void BS_TrySoak(void)
     enum Type types[3];
     GetBattlerTypes(gBattlerTarget, FALSE, types);
     enum Type typeToSet = GetMoveArgType(gCurrentMove);
-    if ((types[0] == typeToSet && types[1] == typeToSet)
+    if (typeToSet == TYPE_BONE && (types[0] == TYPE_BONE || types[1] == TYPE_BONE))
+	{
+		typeToSet = TYPE_ROCK; //Unique feature of the move Fossilise
+	}
+	if ((types[0] == typeToSet && types[1] == typeToSet)
      || GetActiveGimmick(gBattlerTarget) == GIMMICK_TERA)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
+		return;
     }
-    else
-    {
-        SET_BATTLER_TYPE(gBattlerTarget, typeToSet);
-        PREPARE_TYPE_BUFFER(gBattleTextBuff1, typeToSet);
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
+
+    SET_BATTLER_TYPE(gBattlerTarget, typeToSet);
+    PREPARE_TYPE_BUFFER(gBattleTextBuff1, typeToSet);
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_HandleFormChange(void)

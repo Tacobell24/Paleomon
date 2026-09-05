@@ -948,6 +948,7 @@ extern const u8 gBattleAnimMove_IceBreath[];
 extern const u8 gBattleAnimMove_BoltBreath[];
 extern const u8 gBattleAnimMove_BreathOfDecay[];
 extern const u8 gBattleAnimMove_Thagomize[];
+extern const u8 gBattleAnimMove_Fossilise[];
 
 // status animations
 extern const u8 gBattleAnimStatus_Poison[];

@@ -22241,6 +22241,30 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Thagomize,
     },
 
+    [MOVE_FOSSILISE] =
+    {
+        .name = COMPOUND_STRING("Fossilise"),
+        .description = COMPOUND_STRING(
+            "Changes the foe into bone,\n"
+            "and their bones into rock"),
+        .effect = EFFECT_SOAK,
+        .power = 0,
+        .type = TYPE_BONE,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .type = TYPE_BONE },
+        .zMove = { .effect = Z_EFFECT_ATK_UP_1 },
+        .magicCoatAffected = TRUE,
+        .contestEffect = CONTEST_EFFECT_STARTLE_MON_WITH_JUDGES_ATTENTION,
+        .contestCategory = CONTEST_CATEGORY_SMART,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_Fossilise,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
