@@ -36069,3 +36069,11 @@ gBattleAnimMove_JawsOfSteel::
 	blendoff
 	delay 1
 	end	
+
+gBattleAnimMove_BoneFragments::
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 48, 1
+	call CeaselessEdgeSlashes
+	call CeaselessEdgeSlashes
+	call CeaselessEdgeSlashes
+	waitforvisualfinish
+	end

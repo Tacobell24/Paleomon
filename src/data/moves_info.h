@@ -22373,6 +22373,27 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_JawsOfSteel,
     },
 
+    [MOVE_BONE_FRAGMENTS] =
+    {
+        .name = COMPOUND_STRING("Bone Fragments"),
+        .description = COMPOUND_STRING(
+            "Hits and scatters Spikes\n"
+            "around foes."),
+        .effect = EFFECT_CEASELESS_EDGE,
+        .power = 20,
+        .type = TYPE_BONE,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .multiHit = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .sheerForceOverride = TRUE,
+        }),
+        .battleAnimScript = gBattleAnimMove_BoneFragments,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
