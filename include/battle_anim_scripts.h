@@ -951,6 +951,7 @@ extern const u8 gBattleAnimMove_Thagomize[];
 extern const u8 gBattleAnimMove_Fossilise[];
 extern const u8 gBattleAnimMove_Osteoporosis[];
 extern const u8 gBattleAnimMove_FrigidGnaw[];
+extern const u8 gBattleAnimMove_BlazingHorn[];
 
 // status animations
 extern const u8 gBattleAnimStatus_Poison[];

@@ -36038,3 +36038,19 @@ gBattleAnimMove_FrigidGnaw::
 	waitforvisualfinish
 	end
 
+gBattleAnimMove_BlazingHorn::
+	blend_color_cycle selector=F_PAL_ATTACKER, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=11, color=RGB_RED
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 1
+	delay 15
+	createsprite gHornHitSpriteTemplate, ANIM_TARGET, 4, 0, 0, 10
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 2
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 2, 0, 4, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 6, 1
+	delay 3
+	call FlameBurstSpread
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	waitforvisualfinish
+	end
+

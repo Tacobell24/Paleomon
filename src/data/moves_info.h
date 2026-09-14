@@ -22319,6 +22319,32 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_FrigidGnaw,
     },
 
+    [MOVE_BLAZING_HORN] =
+    {
+        .name = COMPOUND_STRING("Blazing Horn"),
+        .description = COMPOUND_STRING(
+            "Jabs the foe with a fiery\n"
+            "horn that may cause flinching."),
+        .effect = EFFECT_HIT,
+        .power = 90,
+        .type = TYPE_FIRE,
+        .accuracy = 90,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FLINCH,
+            .chance = 20,
+        }),
+        .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
+        .contestCategory = CONTEST_CATEGORY_TOUGH,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_BlazingHorn,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
