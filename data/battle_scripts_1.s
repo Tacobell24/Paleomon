@@ -6434,6 +6434,7 @@ BattleScript_MoveEffectSucculentEgg::
 	copybyte gEffectBattler, gBattlerAttacker
 	setpreattackadditionaleffect
 	damagecalc
+	jumpifvolatile BS_ATTACKER, VOLATILE_HEAL_BLOCK, BattleScript_SucculentEggAttack
 	tryhealquarterhealth BS_ATTACKER, BattleScript_SucculentEggAttack
 	attackanimation
 	waitanimation

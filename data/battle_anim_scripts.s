@@ -36071,8 +36071,8 @@ gBattleAnimMove_JawsOfSteel::
 	end	
 
 gBattleAnimMove_BoneFragments::
+	createvisualtask AnimTask_StretchAttackerUp, 3
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 48, 1
-	call CeaselessEdgeSlashes
 	call CeaselessEdgeSlashes
 	call CeaselessEdgeSlashes
 	waitforvisualfinish
