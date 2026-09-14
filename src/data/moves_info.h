@@ -22288,6 +22288,37 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Osteoporosis,
     },
 
+    [MOVE_FRIGID_GNAW] =
+    {
+        .name = COMPOUND_STRING("Frigid Gnaw"),
+        .description = COMPOUND_STRING(
+            "May leave the foe frozen\n"
+            "or poisoned."),
+        .effect = EFFECT_HIT,
+        .power = 60,
+        .type = TYPE_ICE,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .bitingMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE,
+            .chance = 10,
+        },
+        {
+            .moveEffect = MOVE_EFFECT_POISON,
+            .chance = 10,
+        }),
+        .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_FrigidGnaw,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

@@ -36026,3 +36026,15 @@ gBattleAnimMove_Osteoporosis::
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 10, 1
 	end
+
+gBattleAnimMove_FrigidGnaw::
+	playsewithpan SE_M_BITE, SOUND_PAN_TARGET
+	createsprite gFangSpriteTemplate, ANIM_TARGET, 2
+	delay 10
+	createvisualtask AnimTask_ShakeMon, 3, ANIM_TARGET, 3, 0, 10, 1
+	waitforvisualfinish
+	blend_color_cycle selector=F_PAL_TARGET, delay=0, num_blends=4, initial_blend_y=0, target_blend_y=12, color=RGB(12, 26, 31)
+	call IceCrystalEffectShort
+	waitforvisualfinish
+	end
+
