@@ -36054,3 +36054,18 @@ gBattleAnimMove_BlazingHorn::
 	waitforvisualfinish
 	end
 
+gBattleAnimMove_JawsOfSteel::
+	loopsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER, 28, 2
+	metallic_shine permanent=0
+	waitforvisualfinish
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	call CreateBite
+	delay 10
+	create_basic_hitsplat_sprite ANIM_ATTACKER, 2, x=0, y=0, relative_to=ANIM_TARGET, animation=2
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 4, 7, 1
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	delay 1
+	end	

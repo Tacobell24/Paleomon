@@ -22345,6 +22345,34 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_BlazingHorn,
     },
 
+    [MOVE_JAWS_OF_STEEL] =
+    {
+        .name = COMPOUND_STRING("Jaws of Steel"),
+        .description = COMPOUND_STRING(
+            "Bites with steel teeth.\n"
+            "May lower Defense."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 15,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .bitingMove = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
+            .defense = 1,
+            .chance = 20,
+        }),
+        .contestEffect = CONTEST_EFFECT_STARTLE_PREV_MON,
+        .contestCategory = CONTEST_CATEGORY_TOUGH,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_JawsOfSteel,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {
