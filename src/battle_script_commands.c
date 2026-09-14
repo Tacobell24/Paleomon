@@ -563,6 +563,7 @@ static void Cmd_tryconfusionafterskydrop(void);
 static void Cmd_trymovestatchanges(void);
 static void Cmd_trystatchanges(void);
 static void Cmd_trybattlerstatchange(void);
+static void Cmd_trysetosteoporosis(void);
 static void Cmd_dummy(void);
 static void Cmd_callnative(void);
 
@@ -783,6 +784,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
     [B_SCR_OP_TRYMOVESTATCHANGES]                    = Cmd_trymovestatchanges,
     [B_SCR_OP_TRYSTATCHANGES]                        = Cmd_trystatchanges,
     [B_SCR_OP_TRYBATTLERSTATCHANGE]                  = Cmd_trybattlerstatchange,
+    [B_SCR_OP_TRYSETOSTEOPOROSIS]                    = Cmd_trysetosteoporosis,
     [B_SCR_OP_UNUSED_1]                              = Cmd_dummy,
     [B_SCR_OP_UNUSED_2]                              = Cmd_dummy,
     [B_SCR_OP_UNUSED_3]                              = Cmd_dummy,
@@ -10945,6 +10947,24 @@ static void Cmd_trybattlerstatchange(void)
         ClearStatChangeValues();
 
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+static void Cmd_trysetosteoporosis(void)
+{
+    CMD_ARGS(const u8 *failInstr);
+
+    if (gBattleMons[gBattlerTarget].volatiles.osteoporosis
+	 || IsBattlerUnaffectedByMove(gBattlerTarget)
+	 || BlocksPrankster(gCurrentMove, gBattlerAttacker, gBattlerTarget, TRUE)
+	 || gBattleMons[gBattlerTarget].volatiles.semiInvulnerable == STATE_COMMANDER)
+	 {
+		 gBattlescriptCurrInstr = cmd->failInstr;
+	 }
+	 else
+	 {
+         gBattleMons[gBattlerTarget].volatiles.osteoporosis = TRUE;
+		 gBattlescriptCurrInstr = cmd->nextInstr;
+	 }
 }
 
 static void Cmd_dummy(void)

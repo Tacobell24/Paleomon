@@ -1906,4 +1906,10 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_MoveEffectSucculentEgg,
         .battleTvScore = 0,
     },
+
+    [EFFECT_OSTEOPOROSIS] =
+    {
+        .battleScript = BattleScript_MoveEffectOsteoporosis,
+        .battleTvScore = 0,
+    },
 };

@@ -1165,6 +1165,11 @@
     .2byte \statChangeFlags
     .endm
 
+	.macro trysetosteoporosis failInstr:req
+	.byte B_SCR_OP_TRYSETOSTEOPOROSIS
+	.4byte \failInstr
+	.endm
+
 	.macro callnative func:req
 	.byte B_SCR_OP_CALLNATIVE
 	.4byte \func

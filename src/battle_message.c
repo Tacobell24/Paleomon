@@ -900,6 +900,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_HOSTARLESIEZEDCONTROL]                = COMPOUND_STRING("Hostarle siezed control of Biteumen's mind!"),
     [STRINGID_PLUVENILEREGAINEDCONTROL]             = COMPOUND_STRING("Pluvenile regained control of Biteumen's mind!"),
     [STRINGID_PKMNATESOMEEGG]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} ate some of the egg!"),
+    [STRINGID_OSTEOPOROSISWEAKENED]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}'s bones were weakened!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =

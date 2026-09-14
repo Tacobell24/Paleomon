@@ -6456,3 +6456,12 @@ BattleScript_SucculentEggAttack::
 	setadditionaleffects
 	moveendall
 	end
+
+BattleScript_MoveEffectOsteoporosis::
+	attackcanceler
+	trysetosteoporosis BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_OSTEOPOROSISWEAKENED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd

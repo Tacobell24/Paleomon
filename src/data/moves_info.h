@@ -22265,6 +22265,29 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_Fossilise,
     },
 
+    [MOVE_OSTEOPOROSIS] =
+    {
+        .name = COMPOUND_STRING("Osteoporosis"),
+        .description = COMPOUND_STRING(
+            "Weakens the foe's bones to\n"
+            "progressively lower attack."),
+        .effect = EFFECT_OSTEOPOROSIS,
+        .power = 0,
+        .type = TYPE_BONE,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .magicCoatAffected = TRUE,
+        .contestEffect = CONTEST_EFFECT_BETTER_IF_LAST,
+        .contestCategory = CONTEST_CATEGORY_SMART,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_Osteoporosis,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

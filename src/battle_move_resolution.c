@@ -3493,6 +3493,25 @@ static enum MoveEndResult MoveEndMoveBlockRecoil(struct BattleCalcValues *cv)
     return result;
 }
 
+static enum MoveEndResult MoveEndOsteoporosis(struct BattleCalcValues *cv)
+{
+    enum MoveEndResult result = MOVEEND_RESULT_CONTINUE;
+    
+	if (gBattleMons[cv->battlerAtk].volatiles.osteoporosis
+     && IsBattleMovePhysical(cv->move)
+     && !IsBattlerUnaffectedByMove(cv->battlerDef)
+     && !NoAliveMonsForBattlerSide(cv->battlerDef)
+     && IsBattlerTurnDamaged(cv->battlerDef, INCLUDING_SUBSTITUTES))
+    {
+	    SetStatChange(cv->battlerAtk, STAT_ATK, -1);
+	    BattleScriptCall(BattleScript_MoveEffectStatChange);
+	    result = MOVEEND_RESULT_RUN_SCRIPT;
+    }
+   
+    gBattleScripting.moveendState++;
+    return result;
+}
+	
 static enum MoveEndResult MoveEndSheerForce(struct BattleCalcValues *cv)
 {
     if (IsSheerForceAffected(cv->move, cv->abilities[cv->battlerAtk]))
@@ -4512,6 +4531,7 @@ static enum MoveEndResult (*const sMoveEndHandlers[])(struct BattleCalcValues *c
     [MOVEEND_MULTIHIT_MOVE] = MoveEndMultihitMove,
     [MOVEEND_DEFROST] = MoveEndDefrost,
     [MOVEEND_MOVE_BLOCK_RECOIL] = MoveEndMoveBlockRecoil,
+    [MOVEEND_OSTEOPOROSIS] = MoveEndOsteoporosis,
     [MOVEEND_SHEER_FORCE] = MoveEndSheerForce,
     [MOVEEND_MOVE_BLOCK] = MoveEndMoveBlock,
     [MOVEEND_ITEM_EFFECTS_ATTACKER_2] = MoveEndItemEffectsAttacker2,

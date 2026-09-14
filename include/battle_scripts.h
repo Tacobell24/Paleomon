@@ -515,6 +515,7 @@ extern const u8 BattleScript_AlterEgo[];
 extern const u8 BattleScript_FreezingMawActivates[];
 extern const u8 BattleScript_MoveEffectSucculentEgg[];
 extern const u8 BattleScript_SucculentEggAttack[];
+extern const u8 BattleScript_MoveEffectOsteoporosis[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

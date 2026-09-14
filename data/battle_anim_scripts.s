@@ -35998,3 +35998,31 @@ gBattleAnimMove_Fossilise::
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 10, 1
 	end
+
+gBattleAnimMove_Osteoporosis::
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 2, 0, 10, 1
+	createsprite gPainSplitProjectileSpriteTemplate, ANIM_TARGET, 2, -8, -42, ANIM_TARGET
+	delay 5
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_MIDDLE
+	createvisualtask AnimTask_PainSplitMovement, 2, ANIM_TARGET, 0
+	waitforvisualfinish
+	createsprite gPainSplitProjectileSpriteTemplate, ANIM_TARGET, 2, -24, -42, ANIM_TARGET
+	delay 5
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_MIDDLE
+	createvisualtask AnimTask_PainSplitMovement, 2, ANIM_TARGET, 1
+	waitforvisualfinish
+	createsprite gPainSplitProjectileSpriteTemplate, ANIM_TARGET, 2, 8, -42, ANIM_TARGET
+	delay 5
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_MIDDLE
+	createvisualtask AnimTask_PainSplitMovement, 2, ANIM_TARGET, 0
+	waitforvisualfinish
+	createsprite gPainSplitProjectileSpriteTemplate, ANIM_TARGET, 2, -24, -42, ANIM_TARGET
+	delay 10
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_MIDDLE
+	createvisualtask AnimTask_PainSplitMovement, 2, ANIM_TARGET, 2
+	blend_color_cycle selector=F_PAL_TARGET, delay=2, num_blends=2, initial_blend_y=0, target_blend_y=11, color=RGB_WHITE
+	clearmonbg ANIM_ATK_PARTNER
+	blendoff
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 10, 1
+	end
