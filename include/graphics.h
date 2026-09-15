@@ -1146,6 +1146,8 @@ extern const u32 gItemIcon_DeepSeaScale[];
 extern const u16 gItemIconPalette_DeepSeaScale[];
 extern const u32 gItemIcon_DeepSeaTooth[];
 extern const u16 gItemIconPalette_DeepSeaTooth[];
+extern const u32 gItemIcon_DeepSeaPearl[];
+extern const u16 gItemIconPalette_DeepSeaPearl[];
 extern const u32 gItemIcon_SoulDew[];
 extern const u16 gItemIconPalette_SoulDew[];
 extern const u32 gItemIcon_AdamantOrb[];

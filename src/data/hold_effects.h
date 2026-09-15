@@ -196,6 +196,10 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     {
     },
 
+    [HOLD_EFFECT_DEEP_SEA_PEARL] =
+    {
+    },
+
     [HOLD_EFFECT_CAN_ALWAYS_RUN] =
     {
     },

@@ -142,6 +142,7 @@ enum __attribute__((packed)) HoldEffect
     HOLD_EFFECT_BERSERK_GENE,
 	//Custom Hold Effects
 	HOLD_EFFECT_FRIENDSHIP_DOWN,
+	HOLD_EFFECT_DEEP_SEA_PEARL,
     HOLD_EFFECT_COUNT
 };
 
