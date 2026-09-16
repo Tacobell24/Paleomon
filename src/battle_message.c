@@ -901,6 +901,10 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_PLUVENILEREGAINEDCONTROL]             = COMPOUND_STRING("Pluvenile regained control of Biteumen's mind!"),
     [STRINGID_PKMNATESOMEEGG]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} ate some of the egg!"),
     [STRINGID_OSTEOPOROSISWEAKENED]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}'s bones were weakened!"),
+    [STRINGID_PREPARINGWATERYGRAVE]                 = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} is preparing a watery grave for {B_DEF_NAME_WITH_PREFIX}!"),
+    [STRINGID_WATERYGRAVECOUNTINCREASED]            = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX}'s Watery Grave count increased to {B_BUFF1}!"),
+    [STRINGID_WATERYGRAVEENGULFED]                  = COMPOUND_STRING("The Watery Grave engulfed {B_ATK_NAME_WITH_PREFIX}!"),
+    [STRINGID_WATERYGRAVEFERRIED]                   = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} was ferried to their watery grave!"),
 };
 
 const u16 gTrainerUsedItemStringIds[] =

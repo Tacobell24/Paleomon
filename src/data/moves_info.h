@@ -22394,6 +22394,27 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_BoneFragments,
     },
 
+    [MOVE_WATERY_GRAVE] =
+    {
+        .name = COMPOUND_STRING("Watery Grave"),
+        .description = COMPOUND_STRING(
+            "Will drown the foe and user\n"
+            "if used repeatedly."),
+        .effect = EFFECT_WATERY_GRAVE,
+        .power = 65,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 20,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_WateryGrave,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

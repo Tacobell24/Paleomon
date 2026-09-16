@@ -1170,6 +1170,10 @@
 	.4byte \failInstr
 	.endm
 
+	.macro setwaterygrave
+	.byte B_SCR_OP_SETWATERYGRAVE
+	.endm
+
 	.macro callnative func:req
 	.byte B_SCR_OP_CALLNATIVE
 	.4byte \func

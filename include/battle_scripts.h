@@ -516,6 +516,8 @@ extern const u8 BattleScript_FreezingMawActivates[];
 extern const u8 BattleScript_MoveEffectSucculentEgg[];
 extern const u8 BattleScript_SucculentEggAttack[];
 extern const u8 BattleScript_MoveEffectOsteoporosis[];
+extern const u8 BattleScript_MoveEffectWateryGrave[];
+extern const u8 BattleScript_TakenToWateryGrave[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

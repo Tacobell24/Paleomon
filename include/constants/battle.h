@@ -331,6 +331,8 @@ enum VolatileFlags
     F(VOLATILE_IMMOLATION_COUNTER,          immolationCounter,             (u32, UINT8_MAX)) \
     F(VOLATILE_ALTER_EGO_STATE,             alterEgoState,                 (u32, 1)) \
     F(VOLATILE_OSTEOPOROSIS,                osteoporosis,                  (u32, 1)) \
+    F(VOLATILE_WATERY_GRAVE_COUNTER,        wateryGraveCounter,            (u32, 3)) \
+    F(VOLATILE_WATERY_GRAVE_FERRYMAN,       wateryGraveFerryman,           (u32, 1)) \
     F(VOLATILE_TRACE_ACTIVATED,             traceActivated,                (u32, 1))
 
 

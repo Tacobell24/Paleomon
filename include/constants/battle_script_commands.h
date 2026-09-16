@@ -219,6 +219,7 @@ enum BattleScriptOpcode
     B_SCR_OP_TRYSTATCHANGES,
     B_SCR_OP_TRYBATTLERSTATCHANGE,
     B_SCR_OP_TRYSETOSTEOPOROSIS,
+    B_SCR_OP_SETWATERYGRAVE,
 
     // Expansion users, please don't use any of the unused commands.
     // They are reserved for expansion usage.

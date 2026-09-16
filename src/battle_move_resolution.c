@@ -3763,6 +3763,17 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
                 return MOVEEND_RESULT_RUN_SCRIPT;
             }
             break;
+        case EFFECT_WATERY_GRAVE:
+            if (IsBattlerAlive(cv->battlerDef)
+             && IsBattlerTurnDamaged(cv->battlerDef, EXCLUDING_SUBSTITUTES)
+		     && gBattleMons[cv->battlerDef].volatiles.wateryGraveCounter < 3)
+            {
+                BattleScriptCall(BattleScript_MoveEffectWateryGrave);
+                gBattleStruct->eventState.moveEndBattler = 0;
+                gBattleScripting.moveendState++;
+                return MOVEEND_RESULT_RUN_SCRIPT;
+            }
+            break;
         default:
             result = MOVEEND_RESULT_CONTINUE;
             break;

@@ -564,6 +564,7 @@ static void Cmd_trymovestatchanges(void);
 static void Cmd_trystatchanges(void);
 static void Cmd_trybattlerstatchange(void);
 static void Cmd_trysetosteoporosis(void);
+static void Cmd_setwaterygrave(void);
 static void Cmd_dummy(void);
 static void Cmd_callnative(void);
 
@@ -785,6 +786,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
     [B_SCR_OP_TRYSTATCHANGES]                        = Cmd_trystatchanges,
     [B_SCR_OP_TRYBATTLERSTATCHANGE]                  = Cmd_trybattlerstatchange,
     [B_SCR_OP_TRYSETOSTEOPOROSIS]                    = Cmd_trysetosteoporosis,
+    [B_SCR_OP_SETWATERYGRAVE]                        = Cmd_setwaterygrave,
     [B_SCR_OP_UNUSED_1]                              = Cmd_dummy,
     [B_SCR_OP_UNUSED_2]                              = Cmd_dummy,
     [B_SCR_OP_UNUSED_3]                              = Cmd_dummy,
@@ -10965,6 +10967,25 @@ static void Cmd_trysetosteoporosis(void)
          gBattleMons[gBattlerTarget].volatiles.osteoporosis = TRUE;
 		 gBattlescriptCurrInstr = cmd->nextInstr;
 	 }
+}
+
+static void Cmd_setwaterygrave(void)
+{
+    CMD_ARGS();
+	
+    if (gBattleMons[gBattlerTarget].volatiles.wateryGraveCounter < 3)
+    {
+	    gBattleMons[gBattlerTarget].volatiles.wateryGraveCounter++;
+        PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gBattleMons[gBattlerTarget].volatiles.wateryGraveCounter);        
+
+		if (gBattleMons[gBattlerTarget].volatiles.wateryGraveCounter == 3
+		 && IsBattlerAlive(gBattlerTarget))
+		{
+			gBattleMons[gBattlerAttacker].volatiles.wateryGraveFerryman = TRUE;
+		}
+	}
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_dummy(void)

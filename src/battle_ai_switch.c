@@ -231,6 +231,8 @@ u32 GetSwitchChance(enum ShouldSwitchScenario shouldSwitchScenario)
         return SHOULD_SWITCH_WISH_PASSING_PERCENTAGE;
     case SHOULD_SWITCH_LOSES_1V1:
         return GetConfig(SHOULD_SWITCH_LOSES_1V1_PERCENTAGE);
+    case SHOULD_SWITCH_WATERY_GRAVE:
+        return SHOULD_SWITCH_WATERY_GRAVE_PERCENTAGE;
     default:
         return 100;
     }
@@ -726,6 +728,11 @@ static bool32 ShouldSwitchIfBadlyStatused(struct SwitchAiContext *switchContext)
         && monAbility != ABILITY_SOUNDPROOF
         && RandomPercentage(RNG_AI_SWITCH_PERISH_SONG, GetSwitchChance(SHOULD_SWITCH_PERISH_SONG)))
         return SetSwitchinAndSwitch(switchContext->battler, PARTY_SIZE);
+
+	//Watery Grave
+    if (gBattleMons[switchContext->battler].volatiles.wateryGraveCounter == 2
+        && RandomPercentage(RNG_AI_SWITCH_WATERY_GRAVE, GetSwitchChance(SHOULD_SWITCH_WATERY_GRAVE)))
+        return SetSwitchinAndSwitch(switchContext->battler, PARTY_SIZE);	
 
     if (gAiThinkingStruct->aiFlags[switchContext->battler] & AI_FLAG_SMART_SWITCHING)
     {

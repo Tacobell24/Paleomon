@@ -1912,4 +1912,10 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_MoveEffectOsteoporosis,
         .battleTvScore = 0,
     },
+
+    [EFFECT_WATERY_GRAVE] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0,
+    },
 };

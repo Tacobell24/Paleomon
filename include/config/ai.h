@@ -39,6 +39,7 @@
 #define SHOULD_SWITCH_SEEDED_PERCENTAGE                         25
 #define SHOULD_SWITCH_SEEDED_STATS_RAISED_PERCENTAGE            10
 #define SHOULD_SWITCH_INFATUATION_PERCENTAGE                    100
+#define SHOULD_SWITCH_WATERY_GRAVE_PERCENTAGE                   65
 
 // AI smart switching chances for beneficial abilities
 #define SHOULD_SWITCH_NATURAL_CURE_STRONG_PERCENTAGE                66

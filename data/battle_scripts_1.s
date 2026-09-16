@@ -6466,3 +6466,33 @@ BattleScript_MoveEffectOsteoporosis::
 	printstring STRINGID_OSTEOPOROSISWEAKENED
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_MoveEffectWateryGrave::
+	jumpifvolatile BS_TARGET, VOLATILE_WATERY_GRAVE_COUNTER, BattleScript_WateryGraveCounterIncreased
+    setwaterygrave
+	printstring STRINGID_PREPARINGWATERYGRAVE,
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_WATERYGRAVECOUNTINCREASED,
+	waitmessage B_WAIT_TIME_LONG
+	return
+BattleScript_WateryGraveCounterIncreased:
+    setwaterygrave
+	printstring STRINGID_WATERYGRAVECOUNTINCREASED,
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_TakenToWateryGrave::
+	jumpifvolatile BS_ATTACKER, VOLATILE_WATERY_GRAVE_FERRYMAN, BattleScript_EngulfedByWateryGrave
+	printstring STRINGID_WATERYGRAVEFERRIED
+	waitmessage B_WAIT_TIME_LONG
+	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	tryfaintmon BS_ATTACKER
+	return
+BattleScript_EngulfedByWateryGrave:
+	printstring STRINGID_WATERYGRAVEENGULFED
+	waitmessage B_WAIT_TIME_LONG
+	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
+	tryfaintmon BS_ATTACKER
+	return

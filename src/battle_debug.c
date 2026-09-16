@@ -395,6 +395,7 @@ static const struct ListMenuItem sVolatileStatusListItems[] =
     {COMPOUND_STRING("Power Trick"),        VOLATILE_POWER_TRICK},
     {COMPOUND_STRING("Frenzied"),           VOLATILE_FRENZIED},
     {COMPOUND_STRING("Osteoporosis"),       VOLATILE_OSTEOPOROSIS},
+    {COMPOUND_STRING("Watery Grave"),       VOLATILE_WATERY_GRAVE_COUNTER},
 };
 
 static const struct ListMenuItem sHazardsListItems[] =

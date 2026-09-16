@@ -36077,3 +36077,48 @@ gBattleAnimMove_BoneFragments::
 	call CeaselessEdgeSlashes
 	waitforvisualfinish
 	end
+
+gBattleAnimMove_WateryGrave::
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
+	createsprite gDiveBallSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 13, 336
+	waitforvisualfinish
+	playsewithpan SE_M_DIVE, SOUND_PAN_ATTACKER
+	createsprite gDiveWaterSplashSpriteTemplate, ANIM_ATTACKER, 3, 0
+	call DiveSetUpWaterDroplets
+	call DiveSetUpWaterDroplets
+	call DiveSetUpWaterDroplets
+	call DiveSetUpWaterDroplets
+	call DiveSetUpWaterDroplets
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 2, 50, 1
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	delay 0
+	fadetobg BG_WATER_PULSE
+	waitbgfadeout
+	simple_palette_blend unused_subpriority_offset=0, selector=F_PAL_TARGET, delay=2, initial_blend_y=0, target_blend_y=7, color=RGB(0, 13, 23)
+	playsewithpan SE_M_WHIRLPOOL, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 2, 50, 1
+	call WhirlpoolEffect
+	call WhirlpoolEffect
+	call WhirlpoolEffect
+	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 2, 50, 1
+	simple_palette_blend unused_subpriority_offset=0, selector=F_PAL_TARGET, delay=2, initial_blend_y=7, target_blend_y=0, color=RGB(0, 13, 23)
+	waitforvisualfinish
+	restorebg
+	waitbgfadeout
+	clearmonbg ANIM_DEF_PARTNER
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_TARGET
+	invisible ANIM_TARGET
+	createsprite gDiveWaterSplashSpriteTemplate, ANIM_TARGET, 3, 1
+	call DiveAttackWaterDroplets
+	call DiveAttackWaterDroplets
+	call DiveAttackWaterDroplets
+	call DiveAttackWaterDroplets
+	call DiveAttackWaterDroplets
+	waitforvisualfinish
+	visible ANIM_ATTACKER
+	delay 10
+	visible ANIM_TARGET
+	end

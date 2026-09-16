@@ -1553,6 +1553,18 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                 ADJUST_SCORE(-1);
         }
         break;
+	case EFFECT_WATERY_GRAVE:
+	    if (gBattleMons[battlerDef].volatiles.wateryGraveCounter == 2)
+		{
+			s32 damage = aiData->simulatedDmg[battlerAtk][battlerDef][gAiThinkingStruct->movesetIndex].minimum;
+			
+			if (gBattleMons[battlerDef].hp > damage
+			 || CanEndureHit(battlerAtk, battlerDef, move))
+			 {
+				 ADJUST_SCORE(-5);
+			 }
+		}
+		break;
     case EFFECT_ROTOTILLER:
     case EFFECT_FLOWER_SHIELD:
     {

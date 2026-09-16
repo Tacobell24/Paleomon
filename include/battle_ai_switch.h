@@ -38,6 +38,7 @@ enum ShouldSwitchScenario
     SHOULD_SWITCH_DYN_FUNC,
     SHOULD_SWITCH_WISH_PASSING,
     SHOULD_SWITCH_LOSES_1V1,
+    SHOULD_SWITCH_WATERY_GRAVE,
 };
 
 enum SwitchType

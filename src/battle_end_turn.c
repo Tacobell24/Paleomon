@@ -1002,6 +1002,22 @@ static bool32 HandleEndTurnPerishSong(enum BattlerId battler)
     return effect;
 }
 
+static bool32 HandleEndTurnWateryGrave(enum BattlerId battler)
+{
+    bool32 effect = FALSE;
+
+    gBattleStruct->eventState.endTurnBattler++;
+
+    if ((gBattleMons[battler].volatiles.wateryGraveCounter == 3 || gBattleMons[battler].volatiles.wateryGraveFerryman))
+    {
+        SetPassiveDamageAmount(battler, gBattleMons[battler].hp);
+        BattleScriptCall(BattleScript_TakenToWateryGrave);
+        effect = TRUE;
+	}
+ 
+    return effect;
+}
+
 static bool32 HandleEndTurnRoost(enum BattlerId battler)
 {
     bool32 effect = FALSE;
@@ -1612,6 +1628,7 @@ static bool32 (*const sEndTurnEffectHandlers[])(enum BattlerId battler) =
     [ENDTURN_ARENA_TURN_END] = HandleEndTurnArenaTurnEnd,
     [ENDTURN_FAINTED_MON_ACTIONS] = HandleEndTurnFaintedMonActions,
     [ENDTURN_DYNAMAX] = HandleEndTurnDynamax,
+    [ENDTURN_WATERY_GRAVE] = HandleEndTurnWateryGrave,
 };
 
 static bool32 HandleEndTurnEmergencyExit(enum BattlerId battler)

@@ -37,6 +37,7 @@ enum EndTurnResolutionOrder
     ENDTURN_EMBARGO,
     ENDTURN_YAWN,
     ENDTURN_PERISH_SONG,
+    ENDTURN_WATERY_GRAVE,
     ENDTURN_ROOST,
     ENDTURN_SEND_OUT_REPLACEMENTS_3, // For Emergency Exit/Wimp Out activations
     ENDTURN_SECOND_EVENT_BLOCK,
