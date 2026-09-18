@@ -22415,6 +22415,32 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_WateryGrave,
     },
 
+    [MOVE_MARROW_SHOT] =
+    {
+        .name = COMPOUND_STRING("Marrow Shot"),
+        .description = COMPOUND_STRING(
+            "Fires a glob of bone marrow\n"
+            "at the foe. May lower Sp. Def."),
+        .effect = EFFECT_HIT,
+        .power = 90,
+        .type = TYPE_BONE,
+        .accuracy = 100,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_STAT_MINUS,
+            .spDef = 1,
+            .chance = 10,
+        }),
+        .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
+        .contestCategory = CONTEST_CATEGORY_BEAUTY,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_MarrowShot,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

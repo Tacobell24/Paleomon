@@ -36122,3 +36122,18 @@ gBattleAnimMove_WateryGrave::
 	delay 10
 	visible ANIM_TARGET
 	end
+
+gBattleAnimMove_MarrowShot::
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
+	call MoongeistBeamCharge
+	call MoongeistBeamCharge
+	call MoongeistBeamCharge
+	call MoongeistBeamCharge
+	call MoongeistBeamCharge
+	delay 32
+	loopsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET, 20, 3
+	createsprite gSnipeShotBallTemplate, ANIM_TARGET, 2, 0, 0, 16
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 8, 1
+	waitforvisualfinish
+	end

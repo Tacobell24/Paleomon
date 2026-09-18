@@ -955,6 +955,7 @@ extern const u8 gBattleAnimMove_BlazingHorn[];
 extern const u8 gBattleAnimMove_JawsOfSteel[];
 extern const u8 gBattleAnimMove_BoneFragments[];
 extern const u8 gBattleAnimMove_WateryGrave[];
+extern const u8 gBattleAnimMove_MarrowShot[];
 
 // status animations
 extern const u8 gBattleAnimStatus_Poison[];
