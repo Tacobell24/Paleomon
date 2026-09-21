@@ -2119,3 +2119,9 @@
 	.macro trywakebattlersuproar
 	callnative BS_TryWakeBattlersUproar
 	.endm
+
+	.macro jumpiffieldstatus status:req, jumpInstr:req
+	.byte B_SCR_OP_JUMPIFFIELDSTATUS
+	.4byte \status
+	.4byte \jumpInstr
+	.endm

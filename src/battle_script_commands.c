@@ -565,6 +565,7 @@ static void Cmd_trystatchanges(void);
 static void Cmd_trybattlerstatchange(void);
 static void Cmd_trysetosteoporosis(void);
 static void Cmd_setwaterygrave(void);
+static void Cmd_jumpiffieldstatus(void);
 static void Cmd_dummy(void);
 static void Cmd_callnative(void);
 
@@ -787,6 +788,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
     [B_SCR_OP_TRYBATTLERSTATCHANGE]                  = Cmd_trybattlerstatchange,
     [B_SCR_OP_TRYSETOSTEOPOROSIS]                    = Cmd_trysetosteoporosis,
     [B_SCR_OP_SETWATERYGRAVE]                        = Cmd_setwaterygrave,
+    [B_SCR_OP_JUMPIFFIELDSTATUS]                     = Cmd_jumpiffieldstatus,
     [B_SCR_OP_UNUSED_1]                              = Cmd_dummy,
     [B_SCR_OP_UNUSED_2]                              = Cmd_dummy,
     [B_SCR_OP_UNUSED_3]                              = Cmd_dummy,
@@ -2245,6 +2247,7 @@ static inline bool32 IgnoreTargetingForMoveEffect(enum MoveEffect moveEffect) //
     case MOVE_EFFECT_GRASSY_TERRAIN:
     case MOVE_EFFECT_ELECTRIC_TERRAIN:
     case MOVE_EFFECT_PSYCHIC_TERRAIN:
+    case MOVE_EFFECT_DUSTY_TERRAIN:
     case MOVE_EFFECT_DEFOG:
     case MOVE_EFFECT_ION_DELUGE:
     case MOVE_EFFECT_HAZE:
@@ -2791,6 +2794,10 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
                     SetStatChange(effectBattler, STAT_SPEED, -1);
                     statDown = TRUE;
                     break;
+                case STATUS_FIELD_DUSTY_TERRAIN:
+                    SetStatChange(effectBattler, STAT_SPDEF, -1);
+                    statDown = TRUE;
+                    break;
                 default:
                     moveEffect = MOVE_EFFECT_PARALYSIS;
                     break;
@@ -3091,6 +3098,7 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
     case MOVE_EFFECT_GRASSY_TERRAIN:
     case MOVE_EFFECT_ELECTRIC_TERRAIN:
     case MOVE_EFFECT_PSYCHIC_TERRAIN:
+    case MOVE_EFFECT_DUSTY_TERRAIN:
     {
         u32 statusFlag = 0;
         switch (moveEffect)
@@ -3110,6 +3118,10 @@ void SetMoveEffect(enum BattlerId battlerAtk, enum BattlerId effectBattler, enum
         case MOVE_EFFECT_PSYCHIC_TERRAIN:
             statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_PSYCHIC;
+            break;
+        case MOVE_EFFECT_DUSTY_TERRAIN:
+            statusFlag = STATUS_FIELD_DUSTY_TERRAIN;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_DUSTY;
             break;
         default:
             break;
@@ -6729,6 +6741,9 @@ static void RemoveAllTerrains(void)
     case STATUS_FIELD_PSYCHIC_TERRAIN:
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_END_PSYCHIC;
         break;
+    case STATUS_FIELD_DUSTY_TERRAIN:
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_END_DUSTY;
+        break;
     default:
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_COUNT;  // failsafe
         break;
@@ -9664,6 +9679,9 @@ static void Cmd_settypetoenvironment(void)
     case STATUS_FIELD_PSYCHIC_TERRAIN:
         environmentType = TYPE_PSYCHIC;
         break;
+    case STATUS_FIELD_DUSTY_TERRAIN:
+        environmentType = TYPE_BONE;
+        break;
     default:
         environmentType = gBattleEnvironmentInfo[gBattleEnvironment].camouflageType;
         break;
@@ -11543,6 +11561,13 @@ void BS_SetTerrain(void)
         {
             statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_PSYCHIC;
+        }
+        break;
+    case EFFECT_DUSTY_TERRAIN:
+        if (!(gFieldStatuses & STATUS_FIELD_DUSTY_TERRAIN))
+        {
+            statusFlag = STATUS_FIELD_DUSTY_TERRAIN;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_DUSTY;
         }
         break;
     default:
@@ -14063,3 +14088,12 @@ void BS_RestoreStatChangeQueue(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+static void Cmd_jumpiffieldstatus(void)
+{
+	CMD_ARGS(u32 status, const u8 *jumpInstr);
+	
+	if (gFieldStatuses& cmd->status)
+		gBattlescriptCurrInstr = cmd->jumpInstr;
+	else
+		gBattlescriptCurrInstr = cmd->nextInstr;
+}

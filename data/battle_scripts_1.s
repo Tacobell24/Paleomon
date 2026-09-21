@@ -1012,6 +1012,7 @@ BattleScript_EffectMistyTerrain::
 BattleScript_EffectGrassyTerrain::
 BattleScript_EffectElectricTerrain::
 BattleScript_EffectPsychicTerrain::
+BattleScript_EffectDustyTerrain::
 	attackcanceler
 	setterrain BattleScript_ButItFailed
 	attackanimation
@@ -1064,6 +1065,8 @@ BattleScript_EffectHealPulse::
 	jumpifvolatile BS_ATTACKER, VOLATILE_HEAL_BLOCK, BattleScript_MoveUsedHealBlockPrevents @ stops pollen puff
 	jumpifvolatile BS_TARGET, VOLATILE_HEAL_BLOCK, BattleScript_MoveUsedHealBlockPrevents
 	jumpifsubstituteblocks BattleScript_ButItFailed
+	jumpifterrainaffected BS_ATTACKER, STATUS_FIELD_DUSTY_TERRAIN, BattleScript_MoveUsedDustyTerrainPrevents
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_DUSTY_TERRAIN, BattleScript_MoveUsedDustyTerrainPrevents
 	tryhealpulse BattleScript_AlreadyAtFullHp
 	attackanimation
 	waitanimation
@@ -1692,6 +1695,7 @@ BattleScript_EffectConversion::
 
 BattleScript_EffectRestoreHp::
 	attackcanceler
+	jumpifterrainaffected BS_ATTACKER, STATUS_FIELD_DUSTY_TERRAIN, BattleScript_MoveUsedDustyTerrainPrevents
 	tryhealhalfhealth BS_ATTACKER, BattleScript_AlreadyAtFullHp
 	attackanimation
 	waitanimation
@@ -1837,6 +1841,7 @@ BattleScript_PrintReflectLightScreenSafeguardString::
 
 BattleScript_VoltAbsorbHeal:
 	copybyte gBattlerAbility, gBattlerTarget
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_DUSTY_TERRAIN, BattleScript_MoveEnd
 	tryhealquarterhealth BS_TARGET, BattleScript_AbilityProtectedTarget @ Check if max hp
 	goto BattleScript_MoveHPDrain
 
@@ -2551,6 +2556,7 @@ BattleScript_EffectWish::
 
 BattleScript_EffectIngrain::
 	attackcanceler
+    jumpiffieldstatus STATUS_FIELD_DUSTY_TERRAIN, BattleScript_MoveUsedDustyTerrainPrevents
 	trysetvolatile BS_ATTACKER, VOLATILE_ROOT, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
@@ -3583,6 +3589,7 @@ BattleScript_ToxicDebrisRet:
 
 BattleScript_EarthEaterActivates::
 	call BattleScript_AbilityPopUp
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_DUSTY_TERRAIN, BattleScript_EarthEaterBarren
 	pause B_WAIT_TIME_LONG
 	tryhealquarterhealth BS_TARGET, BattleScript_EarthEaterRet
 	healthbarupdate BS_TARGET, PASSIVE_HP_UPDATE
@@ -3591,6 +3598,9 @@ BattleScript_EarthEaterActivates::
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_EarthEaterRet:
 	return
+BattleScript_EarthEaterBarren:
+	printstring STRINGID_EARTHDEVOIDOFNUTRIENTS
+	goto BattleScript_EarthEaterRet
 
 BattleScript_PerishSongCountGoesDown::
 	printstring STRINGID_PKMNPERISHCOUNTFELL
@@ -4872,6 +4882,7 @@ BattleScript_SturdyPreventsOHKO::
 	return
 
 BattleScript_MoveHPDrain::
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_DUSTY_TERRAIN, BattleScript_MoveEnd
 	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
 	healthbarupdate BS_SCRIPTING, PASSIVE_HP_UPDATE
@@ -4966,6 +4977,13 @@ BattleScript_GrassyTerrainHeals::
 	healthbarupdate BS_ATTACKER, PASSIVE_HP_UPDATE
 	datahpupdate BS_ATTACKER, PASSIVE_HP_UPDATE
 	return
+
+BattleScript_MoveUsedDustyTerrainPrevents::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_DUSTYTERRAINPREVENTS
+	waitmessage B_WAIT_TIME_LONG
+	setmoveresultflags MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
 
 BattleScript_StickyHoldActivates::
 	call BattleScript_StickyHoldActivatesRet

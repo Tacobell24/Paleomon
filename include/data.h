@@ -111,6 +111,7 @@ struct StartingStatuses
     // u32 mistyTerrain:1;
     // u32 grassyTerrain:1;
     // u32 psychicTerrain:1;
+    // u32 dustyTerrain:1;
     // u32 trickRoom:1;
     // u32 magicRoom:1;
     // u32 wonderRoom:1;

@@ -22441,6 +22441,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_MarrowShot,
     },
 
+    [MOVE_DUSTY_TERRAIN] =
+    {
+        .name = COMPOUND_STRING("Dusty Terrain"),
+        .description = COMPOUND_STRING(
+            "Ravages the ground for\n"
+            "5 turns. Prevents healing."),
+        .effect = EFFECT_DUSTY_TERRAIN,
+        .power = 0,
+        .type = TYPE_BONE,
+        .accuracy = 0,
+        .pp = 10,
+        .target = TARGET_FIELD,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_DEF_UP_1 },
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .skyBattleBanned = TRUE,
+        .contestEffect = CONTEST_EFFECT_BETTER_WHEN_AUDIENCE_EXCITED, //CONTEST_EFFECT_EXCITES_AUDIENCE_MORE_IF_FIRST
+        .contestCategory = CONTEST_CATEGORY_SMART,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = gBattleAnimMove_DustyTerrain,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

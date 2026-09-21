@@ -36137,3 +36137,38 @@ gBattleAnimMove_MarrowShot::
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 8, 1
 	waitforvisualfinish
 	end
+
+gBattleAnimMove_DustyTerrain::
+	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	waitforvisualfinish
+	delay 30
+	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB(27, 27, 0), 12, 5, 1
+	delay 4
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	playsewithpan SE_M_REVERSAL, SOUND_PAN_ATTACKER
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 0
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 42
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 84
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 126
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 168
+	createsprite gElectricTerrainOrbsTemplate, ANIM_ATTACKER, 2, 26, 210
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 0, 4, RGB(60, 57, 44)
+	delay 52
+	setarg 7, -1
+	playsewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_ATTACKER, 0
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 0
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 32
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 64
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 96
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 128
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 160
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 192
+	createsprite gElectricTerrainFlyingBallTemplate, ANIM_TARGET, 2, 224
+	loopsewithpan SE_M_EARTHQUAKE, SOUND_PAN_TARGET, 22, 3
+	waitforvisualfinish
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 4, 0, RGB(60, 57, 44)
+	waitforvisualfinish
+	end

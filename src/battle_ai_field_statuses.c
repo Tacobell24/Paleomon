@@ -42,6 +42,7 @@ static enum FieldEffectOutcome BenefitsFromElectricTerrain(enum BattlerId battle
 static enum FieldEffectOutcome BenefitsFromGrassyTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromMistyTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromPsychicTerrain(enum BattlerId battler);
+static enum FieldEffectOutcome BenefitsFromDustyTerrain(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromGravity(enum BattlerId battler);
 static enum FieldEffectOutcome BenefitsFromTrickRoom(enum BattlerId battler);
 
@@ -120,6 +121,8 @@ bool32 FieldStatusChecker(enum BattlerId battler, u32 fieldStatus, enum FieldEff
             result = BenefitsFromMistyTerrain(battler);
         if (fieldStatus & STATUS_FIELD_PSYCHIC_TERRAIN)
             result = BenefitsFromPsychicTerrain(battler);
+        if (fieldStatus & STATUS_FIELD_DUSTY_TERRAIN)
+            result = BenefitsFromDustyTerrain(battler);
 
         // other field statuses
         if (fieldStatus & STATUS_FIELD_GRAVITY)
@@ -445,6 +448,46 @@ static enum FieldEffectOutcome BenefitsFromPsychicTerrain(enum BattlerId battler
     if (AI_IsAbilityOnSide(battler, ABILITY_GALE_WINGS)
      || AI_IsAbilityOnSide(battler, ABILITY_TRIAGE)
      || AI_IsAbilityOnSide(battler, ABILITY_PRANKSTER))
+        return FIELD_EFFECT_NEGATIVE;
+
+    return FIELD_EFFECT_NEUTRAL;
+}
+
+static enum FieldEffectOutcome BenefitsFromDustyTerrain(enum BattlerId battler)
+{
+    if (DoesAbilityBenefitFromFieldStatus(gAiLogicData->abilities[battler], STATUS_FIELD_DUSTY_TERRAIN))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (HasBattlerTerrainBoostMove(battler, STATUS_FIELD_DUSTY_TERRAIN)
+     || HasBattlerTerrainBoostMove(BATTLE_PARTNER(battler), STATUS_FIELD_DUSTY_TERRAIN))
+        return FIELD_EFFECT_POSITIVE;
+
+    bool32 grounded = AI_IsBattlerGrounded(battler);
+    bool32 allyGrounded = FALSE;
+    if (HasPartner(battler))
+        allyGrounded = AI_IsBattlerGrounded(BATTLE_PARTNER(battler));
+
+    // don't bother if we're not grounded
+    if (grounded || allyGrounded)
+    {
+        // harass healers
+        if (AI_IsAbilityOnSide(LEFT_FOE(battler), ABILITY_EXSANGUINATE)
+         || AI_IsAbilityOnSide(LEFT_FOE(battler), ABILITY_VOLT_ABSORB)
+         || AI_IsAbilityOnSide(LEFT_FOE(battler), ABILITY_WATER_ABSORB)
+         || AI_IsAbilityOnSide(LEFT_FOE(battler), ABILITY_EARTH_EATER)
+         || AI_IsAbilityOnSide(LEFT_FOE(battler), ABILITY_TRIAGE))
+            return FIELD_EFFECT_POSITIVE;
+    }
+
+    if (grounded && HasDamagingMoveOfType(battler, TYPE_BONE))
+        return FIELD_EFFECT_POSITIVE;
+
+    if (HasBattlerTerrainBoostMove(LEFT_FOE(battler), STATUS_FIELD_DUSTY_TERRAIN)
+     || HasBattlerTerrainBoostMove(RIGHT_FOE(battler), STATUS_FIELD_DUSTY_TERRAIN))
+        return FIELD_EFFECT_NEGATIVE;
+
+    if (AI_IsAbilityOnSide(battler, ABILITY_EXSANGUINATE)
+     || AI_IsAbilityOnSide(battler, ABILITY_TRIAGE))
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;

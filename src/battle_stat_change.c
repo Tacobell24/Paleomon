@@ -114,6 +114,16 @@ static bool32 CheckSpecificMoveCondition(struct BattleCalcValues *cv, struct Sta
         }
         break;
     case EFFECT_ROTOTILLER:
+        if (gFieldStatuses & STATUS_FIELD_DUSTY_TERRAIN)
+        {
+            if (!st->onlyChecking)
+            {
+                st->script = BattleScript_MoveUsedDustyTerrainPrevents;
+                gBattleScripting.battler = cv->battlerDef;
+            }
+            return TRUE;
+        }
+
         if (!IsBattlerGrounded(cv->battlerDef, cv->abilities[cv->battlerDef], cv->holdEffects[cv->battlerDef])
          || !IS_BATTLER_OF_TYPE(cv->battlerDef, TYPE_GRASS))
         {

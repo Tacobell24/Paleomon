@@ -452,8 +452,9 @@ enum TypeSideHazard
 #define STATUS_FIELD_PSYCHIC_TERRAIN                (1 << 9)
 #define STATUS_FIELD_ION_DELUGE                     (1 << 10)
 #define STATUS_FIELD_FAIRY_LOCK                     (1 << 11)
+#define STATUS_FIELD_DUSTY_TERRAIN                  (1 << 12)
 
-#define STATUS_FIELD_TERRAIN_ANY        (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
+#define STATUS_FIELD_TERRAIN_ANY        (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN | STATUS_FIELD_DUSTY_TERRAIN)
 
 // Flags describing move's result
 #define MOVE_RESULT_MISSED                 (1 << 0)
@@ -582,6 +583,7 @@ enum __attribute__((packed)) MoveEffect
     MOVE_EFFECT_GRASSY_TERRAIN,
     MOVE_EFFECT_ELECTRIC_TERRAIN,
     MOVE_EFFECT_PSYCHIC_TERRAIN,
+    MOVE_EFFECT_DUSTY_TERRAIN,
     MOVE_EFFECT_VINE_LASH,
     MOVE_EFFECT_WILDFIRE,
     MOVE_EFFECT_CANNONADE,
@@ -795,6 +797,8 @@ enum FaintedActions
     F(STARTING_STATUS_GRASSY_TERRAIN_TEMPORARY,       grassyTerrainTemporary,     (u32, 1)) /* Grassy Terrain Temporary (5 turns) */       \
     F(STARTING_STATUS_PSYCHIC_TERRAIN,                psychicTerrain,             (u32, 1)) /* Psychic Terrain (Permanent) */              \
     F(STARTING_STATUS_PSYCHIC_TERRAIN_TEMPORARY,      psychicTerrainTemporary,    (u32, 1)) /* Psychic Terrain Temporary (5 turns) */      \
+    F(STARTING_STATUS_DUSTY_TERRAIN,                  dustyTerrain,               (u32, 1)) /* Dusty Terrain (Permanent) */                \
+    F(STARTING_STATUS_DUSTY_TERRAIN_TEMPORARY,        dustyTerrainTemporary,      (u32, 1)) /* Dusty Terrain Temporary (5 turns) */        \
     F(STARTING_STATUS_TRICK_ROOM,                     trickRoom,                  (u32, 1)) /* Trick Room (Permanent) */                   \
     F(STARTING_STATUS_TRICK_ROOM_TEMPORARY,           trickRoomTemporary,         (u32, 1)) /* Trick Room Temporary (5 turns) */           \
     F(STARTING_STATUS_MAGIC_ROOM,                     magicRoom,                  (u32, 1)) /* Magic Room (Permanent) */                   \

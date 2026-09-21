@@ -2669,7 +2669,7 @@ static void SetHealScript(struct BattleCalcValues *cv, s32 healAmount)
 
 static enum MoveEndResult MoveEndAbsorb(struct BattleCalcValues *cv)
 {
-    if (gBattleStruct->unableToUseMove)
+    if (gBattleStruct->unableToUseMove || IsDustyTerrainAffected(cv->battlerDef, cv->abilities[cv->battlerDef], cv->holdEffects[cv->battlerDef], gFieldStatuses))
     {
         gBattleScripting.moveendState++;
         return MOVEEND_RESULT_CONTINUE;

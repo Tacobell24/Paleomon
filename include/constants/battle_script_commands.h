@@ -220,6 +220,7 @@ enum BattleScriptOpcode
     B_SCR_OP_TRYBATTLERSTATCHANGE,
     B_SCR_OP_TRYSETOSTEOPOROSIS,
     B_SCR_OP_SETWATERYGRAVE,
+    B_SCR_OP_JUMPIFFIELDSTATUS,
 
     // Expansion users, please don't use any of the unused commands.
     // They are reserved for expansion usage.
